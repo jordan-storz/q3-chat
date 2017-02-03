@@ -12,6 +12,20 @@ module.exports = {
     path: __dirname + '/public',
     filename: 'bundle.js'
   },
+  module: {
+    loaders: [
+      { test: /\.html$/, loader: 'ng-cache-loader?prefix=app/' },
+      { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
+      }
+    ]
+  },
   plugins: [
       new webpack.optimize.CommonsChunkPlugin({
           name: "vendor",
