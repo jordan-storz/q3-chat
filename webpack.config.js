@@ -31,5 +31,10 @@ module.exports = {
           name: "vendor",
           filename: "vendor.bundle.js"
       })
-    ]
+    ],
+    resolve: {
+     alias: {
+       jquery: "jquery/src/jquery"
+     }
+   }
 }
