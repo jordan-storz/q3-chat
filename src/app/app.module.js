@@ -11,8 +11,10 @@ import singleMessageComponent from './single-message/single-message.component.js
 import messageInputComponent  from './message-input/message-input.component.js';
 
 // Directives
-import dragDropDirective from './directives/drag-drop.directive.js';
+import dragDropDirective      from './directives/drag-drop.directive.js';
 
+//Services
+import socketService          from './services/socket.service.js';
 
 angular.module('chatApp', [])
   .component('mainComponent', mainComponent)
@@ -22,7 +24,11 @@ angular.module('chatApp', [])
   .component('messagesList', messagesListComponent)
   .component('singleMessage', singleMessageComponent)
   .component('messageInput', messageInputComponent)
-  .directive('dragDrop', dragDropDirective);
+  .directive('dragDrop', dragDropDirective)
+  .service('socket', socketService);
+
+  console.log("hello");
+
 
 // single-message
 // single-user
