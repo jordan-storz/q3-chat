@@ -6,7 +6,17 @@ div#drag-div {
 }
 
 .chat-room-wrapper {
-  width: 20%;
+  width: 40vh;
+  height: 40vh;
   border: 1px solid black;
   background-color: red;
+}
+
+.chat-message-maker {
+  width: 10vh;
+  height: 10vh;
+}
+
+.chat-message-maker textarea {
+  margin-top: 10vh;
 }

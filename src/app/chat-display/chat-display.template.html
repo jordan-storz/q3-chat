@@ -4,11 +4,11 @@
             <div class="opacity-btn-container" ng-mouseover="$ctrl.opacity()">
                 <i id="increment-chat-opacity" class="glyphicon glyphicon-plus" ng-click="$ctrl.increaseOpacity()"></i>
                 <i id="decrement-chat-opacity" class="glyphicon glyphicon-minus" ng-click="$ctrl.decreaseOpacity()"></i>
+                <button class="minimize-btn">0</button>
             </div>
-            <button class="minimize-btn"></button>
         </div>
         <messages-list messages=$ctrl.messages></messages-list>
-        <message-input></message-input>
-
     </div>
+    <message-input></message-input>
+
 </div>
