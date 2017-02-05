@@ -1,7 +1,6 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
 
-
 const controller = ['socket', function(socket) {
     console.log(socket);
     const vm = this;
