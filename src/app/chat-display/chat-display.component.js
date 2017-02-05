@@ -1,20 +1,24 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
 
-
 const controller = ['socket', function(socket) {
-    console.log(socket);
     const vm = this;
+    vm.user = {};
+    vm.minimize = false;
     vm.messages = [];
 
     vm.$onInit = function() {
-        socket.firstContact({
-            url: "www.google.com"
-        });
-        socket.existingPosts().then(function(messages) {
-            vm.messages = messages;
-        });
+      socket.socket.emit('first-contact', {url: "www.google.com"});
+    }
 
+    vm.messages = socket.socket.on('message-list-and-name', function(data) {
+      //I really wanna set the name attribute on the user object here
+      vm.messages = data.messageRay;
+      return data.messageRay;
+    });
+
+    vm.minimizeBox = function() {
+      vm.minimize = !vm.minimize;
     }
 
     //the below was a breaking change

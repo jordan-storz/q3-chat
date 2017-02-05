@@ -5,18 +5,81 @@ div#drag-div {
   z-index: 1000;
 }
 
+.flexer {
+    display: flex;
+}
+
 .chat-room-wrapper {
-  width: 40vh;
+  opacity: .8;
+  box-sizing: border-box;
+  width: 28%;
   height: 40vh;
+  padding: 0;
+  margin: 0;
   border: 1px solid black;
   background-color: red;
+  overflow-x: auto;
 }
 
 .chat-message-maker {
-  width: 10vh;
-  height: 10vh;
+  box-sizing: border-box;
+  margin-top: 0;
+  width: 28%;
+  height: 3em;
 }
 
 .chat-message-maker textarea {
-  margin-top: 10vh;
+  width: 100%;
+}
+
+.minimize-btn {
+  box-sizing: border-box;
+  padding: 2px;
+  height: 15px;
+}
+
+.maximize-button {
+  width: 40px;
+  height: 20px;
+  background: green;
+  float: right;
+}
+
+.opacity-btn-container {
+  box-sizing: border-box;
+  margin: 0;
+  height: 15%;
+  font-size: .8rem;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.message-name {
+  display: inline;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.message-message {
+  display: inline;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.list {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.single-message-container {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.wrapper {
+  padding: 6px;
 }

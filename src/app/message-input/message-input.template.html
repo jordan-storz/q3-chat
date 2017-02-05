@@ -1,4 +1,6 @@
 <div class="chat-message-maker">
-    <textarea class="message-area" placeholder="Your message here"></textarea>
+    <textarea class="message-area"
+        ng-model="$ctrl.messageArea"
+        placeholder="Your message here"></textarea>
     <input type="submit" ng-click="$ctrl.sendMessage()" class="new-message-sender btn-success btn">
 </div>
