@@ -9,9 +9,9 @@ const controller = ['socket' ,function(socket) {
 
   vm.$onInit = function() {
     socket.firstContact({url: "www.google.com"});
-    socket.existingPosts().then(function(messages) {
-      vm.messages = messages;
-    });
+    // socket.existingPosts().then(function(messages) {
+    //   vm.messages = messages;
+    // });
 
   }
 

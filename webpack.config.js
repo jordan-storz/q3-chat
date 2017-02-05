@@ -5,7 +5,8 @@ module.exports = {
     app: __dirname + '/src',
     vendor: [
       'jquery',
-      'angular'
+      'angular',
+      'socket.io-client'
     ]
   },
   output: {
