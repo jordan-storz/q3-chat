@@ -1,28 +1,27 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
 
-const controller = ['socket', 'currentRoom', function(socket, currentRoom) {
+
+const controller = ['socket', '$scope', 'currentRoom', function(socket, $scope, currentRoom) {
     const vm = this;
+    vm.user = {};
+    vm.minimize = false;
     vm.messages = [];
 
     vm.$onInit = function() {
-      let room = currentRoom.is();
-      console.log(`current room: ${room}`);
-      // socket.firstContact({
-      //     url: "www.google.com"
-      // });
-      // socket.existingPosts().then(function(messages) {
-      //     vm.messages = messages;
-      // });
-
+      socket.emit('first-contact', {url: "www.google.com"});
     }
 
-    //the below was a breaking change
-    // socket.on('testURL', function(data) {
-    //     console.log(data);
-    //     vm.messages.push(data.message);
-    //     console.log(vm.messages);
-    // })
+    socket.on('message-list-and-name', function(data) {
+      //I really wanna set the name attribute on the user object here
+      vm.messages = data.messageRay;
+      $scope.$apply();
+    });
+
+    vm.minimizeBox = function() {
+      vm.minimize = !vm.minimize;
+    }
+
 
     vm.increaseOpacity = function() {
         let opac = parseFloat($('.chat-room-wrapper ').css('opacity')) + .1;

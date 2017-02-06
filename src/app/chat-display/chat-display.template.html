@@ -1,14 +1,20 @@
-<div class="chat-room-wrapper container">
-    <div class="container">
-        <div class="row">
-            <div class="opacity-btn-container" ng-mouseover="$ctrl.opacity()">
-                <i id="increment-chat-opacity" class="glyphicon glyphicon-plus" ng-click="$ctrl.increaseOpacity()"></i>
-                <i id="decrement-chat-opacity" class="glyphicon glyphicon-minus" ng-click="$ctrl.decreaseOpacity()"></i>
-                <button class="minimize-btn">0</button>
-            </div>
-        </div>
-        <messages-list messages=$ctrl.messages></messages-list>
-    </div>
-    <message-input></message-input>
-
+<div class="maximize-button"
+     ng-show="$ctrl.minimize"
+     ng-click="$ctrl.minimizeBox()">Maximize
 </div>
+<div class="chat-room-wrapper" 
+     ng-show="!$ctrl.minimize">
+  <div class="wrapper">
+    <div class="opacity-btn-container flexer space-between" ng-mouseover="$ctrl.opacity()">
+      <div class="flexer">
+        <i id="increment-chat-opacity" class="glyphicon glyphicon-plus" ng-click="$ctrl.increaseOpacity()"></i>
+        <i id="decrement-chat-opacity" class="glyphicon glyphicon-minus" ng-click="$ctrl.decreaseOpacity()"></i>
+      </div>
+      <button ng-click="$ctrl.minimizeBox()"
+          class="minimize-btn">MIN
+      </button>
+    </div>
+    <messages-list messages=$ctrl.messages></messages-list>
+  </div>
+</div>
+<message-input ng-show="!$ctrl.minimize"></message-input>
