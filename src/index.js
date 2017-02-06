@@ -10,5 +10,5 @@ const $application =
     <div ng-app="chatApp">
       <main-component></main-component>
     </div>
-    `)
+    `);
 $('body').prepend($application);
