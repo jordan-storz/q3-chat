@@ -2,7 +2,9 @@ import $ from "jquery";
 import template from './chat-display.template.html';
 
 
-const controller = ['socket', '$scope', 'currentRoom', function(socket, $scope, currentRoom) {
+const controller = [
+  'socket', '$scope', 'currentRoom', 'roomHttp',
+  function(socket, $scope, currentRoom, roomHttp) {
     const vm = this;
     vm.user = { //This is gonna be a service
       url: currentRoom.is(),
@@ -14,7 +16,15 @@ const controller = ['socket', '$scope', 'currentRoom', function(socket, $scope, 
     vm.users = [];
 
     vm.$onInit = function() {
-      socket.emit('first-contact', {url: vm.user.url});
+      // socket.emit('first-contact', {url: vm.user.url});
+      roomHttp.getRoom().then(response => {
+        console.log('response: ');
+        console.log(response);
+        let room = response.data.room;
+        let messages = [response.data.messages];
+        vm.messages = messages;
+        vm.room = room;
+      })
     }
 
     socket.on('message-list-and-name', function(data) {

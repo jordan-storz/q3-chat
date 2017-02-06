@@ -1,11 +1,9 @@
 import template from './main.template.html';
 
-const controller = ['currentUser', function(currentUser) {
+const controller = [function() {
   const vm = this;
 
   vm.$onInit = function () {
-    console.log('init app');
-    currentUser.init();
   }
 }];
 
