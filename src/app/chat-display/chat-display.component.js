@@ -1,6 +1,6 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
-
+import R from 'ramda';
 
 const controller = [
   'socket', '$scope', 'currentRoom', 'roomHttp',
@@ -21,7 +21,7 @@ const controller = [
         console.log('response: ');
         console.log(response);
         let room = response.data.room;
-        let messages = [response.data.messages];
+        let messages = response.data.messages;
         vm.messages = messages;
         vm.room = room;
       })
