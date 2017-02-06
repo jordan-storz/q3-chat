@@ -7,7 +7,7 @@ module.exports = ['$http', 'currentRoom', function($http, currentRoom) {
     return `${apiPoint}?roomName=${roomName}`
   }
 
-  service.getRoomMessages = function() {
+  service.getMessages = function() {
     return $http.get(makeUrl());
   }
 }];

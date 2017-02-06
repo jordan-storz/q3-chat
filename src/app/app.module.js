@@ -15,8 +15,8 @@ import dragDropDirective      from './directives/drag-drop.directive.js';
 
 //Services
 import socketService          from './services/socket.service.js';
-import currentRoomService            from './services/current-room.js';
-import messageHttpService            from './services/message-http.js';
+import currentRoomService     from './services/current-room.js';
+import messageHttpService     from './services/message-http.js';
 
 angular.module('chatApp', [])
   .component('mainComponent', mainComponent)
@@ -30,13 +30,3 @@ angular.module('chatApp', [])
   .service('socket', socketService)
   .service('currentRoom', currentRoomService)
   .service('messageHttp', messageHttpService)
-
-
-
-// single-message
-// single-user
-
-
-// CHAT-DISPLAY
-// USERS-DISPLAY
-// VIDEO-DISPLAY
