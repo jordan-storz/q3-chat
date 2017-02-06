@@ -1,20 +1,21 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
 
-const controller = ['socket', function(socket) {
+const controller = ['socket', '$scope',  function(socket, $scope) {
     const vm = this;
     vm.user = {};
     vm.minimize = false;
     vm.messages = [];
 
     vm.$onInit = function() {
-      socket.socket.emit('first-contact', {url: "www.google.com"});
+      socket.emit('first-contact', {url: "www.google.com"});
     }
 
-    vm.messages = socket.socket.on('message-list-and-name', function(data) {
+
+    socket.on('message-list-and-name', function(data) {
       //I really wanna set the name attribute on the user object here
       vm.messages = data.messageRay;
-      return data.messageRay;
+      $scope.$apply();
     });
 
     vm.minimizeBox = function() {

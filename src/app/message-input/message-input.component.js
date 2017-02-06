@@ -1,22 +1,18 @@
 import template from './message-input.template.html';
 
 const controller = function(socket) {
-    const vm = this
-    vm.user = {};
-
-    vm.$onInit = function() {
-
-    }
+    const vm = this;
 
     vm.sendMessage = function() {
-        //we will need a global user object with (url, name, messge) //
+      if(vm.messageArea !== '') {
         let data = {
             name: 'Mike',
             message: vm.messageArea,
-            url: 'testURL'
+            url: 'www.google.com'
         }
-        socket.socket.emit('send-message', data)
-
+        socket.emit('send-message', data);
+        vm.messageArea = '';
+      }
     }
 
 }
