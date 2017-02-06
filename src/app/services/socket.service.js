@@ -7,5 +7,5 @@ module.exports = function() {
     socket.emit('first-contact', obj);
   }
 
-  return io.connect('http://127.0.0.1:3000');
+  return io.connect('http://127.0.0.1:4200');
 }
