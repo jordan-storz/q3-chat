@@ -1,18 +1,19 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
 
-const controller = ['socket', function(socket) {
-    console.log(socket);
+const controller = ['socket', 'currentRoom', function(socket, currentRoom) {
     const vm = this;
     vm.messages = [];
 
     vm.$onInit = function() {
-        socket.firstContact({
-            url: "www.google.com"
-        });
-        socket.existingPosts().then(function(messages) {
-            vm.messages = messages;
-        });
+      let room = currentRoom.is();
+      console.log(`current room: ${room}`);
+      // socket.firstContact({
+      //     url: "www.google.com"
+      // });
+      // socket.existingPosts().then(function(messages) {
+      //     vm.messages = messages;
+      // });
 
     }
 
