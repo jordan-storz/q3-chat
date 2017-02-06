@@ -9,6 +9,14 @@ div#drag-div {
     display: flex;
 }
 
+.box-me {
+  border: 1px solid black;
+}
+
+.block-me {
+  display: block;
+}
+
 .chat-room-wrapper {
   opacity: 1;
   box-sizing: border-box;
@@ -56,10 +64,14 @@ div#drag-div {
   justify-content: space-between;
 }
 
-.message-name {
+.message-name, .this-user h3 {
   display: inline;
   font-size: 1.2em;
   margin: 0;
+}
+
+.this-user h3 {
+  color: red;
 }
 
 .message-message {
