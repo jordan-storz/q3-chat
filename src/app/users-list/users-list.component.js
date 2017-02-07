@@ -1,38 +1,35 @@
 import template from './users-list.template.html';
 
 const controller = function(socket, $scope, currentRoom) {
-  //at this point, if currentUsers URL and name are not set, they need to
-  //be set or these actions may need to happen somewhere else
   const vm = this;
+  console.log('hello');
   vm.users = [{name: "bob", socketId: 'asfscfs23', room: currentRoom.is()}];
   vm.hideOptionsWithThisUser = true;
 
-  vm.madeCall = false;
-  vm.currentUser = {
-      name: "mike",
-      socketId: 'asfscfs2f3',
-      room: currentRoom.is()
-  };
-
   vm.$onInit = function() {
-    vm.url = currentRoom.is();
+    console.log('users-list line 17: currentUser');
+    console.log(vm.currentUser);
     socket.emit('get-users', vm.currentUser);
-    // This is a request to sockets to gather the info of every one with currentUsers url
-    socket.emit('new-user', vm.currentUser);  //lets everyone else know that this user has joined
+    socket.emit('new-user', vm.currentUser);
+
+    socket.on(`${vm.currentUser.room}-add-new-user`, function(user) {
+      //if(user.socketId !== vm.currentUser.socketId) {
+        vm.users.push(user);
+        $scope.$apply();
+      //}
+    })
+
+    socket.on(`${vm.currentUser.socketId}-request-chat-request`, function(data) {
+      console.log('recieving video chat request');
+      vm.currentUser.initiator = false;
+      vm.isOnCall = true;
+      $scope.$apply();
+    });
   }
 
   socket.on('user-list', function(data) {
-  // This function expects a list of names with their socket ids
     vm.users = data.users
     $scope.$apply();
-  })
-
-  socket.on(`${vm.url}-add-new-user`, function(user) {
-    //This expects an object with atleast a name and a socket id element
-    if(user.socketId !== vm.currentUser.socketId) {
-      vm.users.push(user);
-      $scope.$apply();
-    }
   })
 
   socket.on('disconnect-event', function() {
@@ -50,18 +47,40 @@ const controller = function(socket, $scope, currentRoom) {
     console.log('changing name');
   }
 
-  vm.blockUser = function() {
-    console.log(`blocking user`);
+  vm.blockUser = function(user) {
+    console.log(`blocking: ${user.name}`);
+    console.log(user);
   }
 
-  vm.startVidChat = function() {
-    console.log('Start video chat');
-    vm.madeCall = true;
+  vm.startVidChat = function(user) {
+    console.log('Start video chat', user);
+    vm.isOnCall = true;
+    vm.currentUser.initiator = true;
+    console.log(vm.currentUser);
+    let obj = {
+      fromId: vm.currentUser.socketId,
+      toId: user.socketId,
+      fromkey: 'key'
+    }
+    socket.emit('request-video-chat', obj);
   }
+
+  //******** Video Requester functions **************
+
+
+
+
+  //*********** video Requestee functions ***********
+
+
 
 }
 
 module.exports = {
   template,
-  controller
+  controller,
+  bindings: {
+    currentUser: '=',
+    isOnCall: '='
+  }
 }

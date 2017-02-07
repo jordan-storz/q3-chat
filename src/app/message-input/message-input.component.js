@@ -3,14 +3,14 @@ import template from './message-input.template.html';
 const controller = function(socket) {
     const vm = this;
 
+    vm.$onInit = function() {
+      console.log(vm.currentUser);
+    }
+
     vm.sendMessage = function() {
       if(vm.messageArea !== '') {
-        let data = {
-            name: 'Mike',
-            message: vm.messageArea,
-            url: 'www.google.com'
-        }
-        socket.emit('send-message', data);
+        vm.currentUser.message = vm.messageArea;
+        socket.emit('send-message', vm.currentUser);
         vm.messageArea = '';
       }
     }
@@ -19,5 +19,9 @@ const controller = function(socket) {
 
 module.exports = {
     template,
-    controller
+    controller,
+    bindings: {
+      currentUser: '=',
+      isOnCall: '='
+    }
 }

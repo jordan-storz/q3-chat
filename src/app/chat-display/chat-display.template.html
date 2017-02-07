@@ -8,9 +8,9 @@
 <div class="chat-room-wrapper"
      ng-show="!$ctrl.minimize">
   <div class="component-container">
-    <log-in></log-in>
+    <log-in show-log-in=$ctrl.showLogIn
+        current-user=$ctrl.currentUser></log-in>
   </div>
-  <log-in></log-in>
   <div class="wrapper">
     <div class="opacity-btn-container flexer space-between" ng-mouseover="$ctrl.opacity()">
       <div class="flexer">
@@ -21,7 +21,9 @@
           class="minimize-btn">MIN
       </button>
     </div>
-    <messages-list messages=$ctrl.messages></messages-list>
+    <messages-list current-user=$ctrl.currentUser
+      messages=$ctrl.messages></messages-list>
   </div>
 </div>
-<message-input ng-show="!$ctrl.minimize"></message-input>
+<message-input  current-user=$ctrl.currentUser
+  ng-show="!$ctrl.minimize"></message-input>

@@ -113,3 +113,17 @@ div#drag-div {
   margin: 20px auto;
   border-radius: 10px;
 }
+
+video {
+  width: 100%;
+}
+
+.accept-call {
+  height: 100%;
+  background: green;
+}
+
+.decline-call {
+  height: 100%;
+  background: red;
+}
