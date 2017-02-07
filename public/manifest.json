@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Michael Jordan chat extension",
+  "description": "This extesion adds chat capability to every page",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": [
+        "vendor.bundle.js",
+        "bundle.js"
+      ]
+    }
+  ],
+
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
