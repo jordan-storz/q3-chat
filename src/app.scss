@@ -95,3 +95,35 @@ div#drag-div {
 .wrapper {
   padding: 6px;
 }
+
+.michael-jordan-log-in {
+  box-sizing: border-box;
+  background-color: black;
+  opacity: .5;
+  position: fixed;
+}
+
+.michael-jordan-form {
+  opacity: 1;
+  box-sizing: border-box;
+  margin: 20% auto;
+}
+
+.michael-jordan-submit-button {
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+video {
+  width: 100%;
+}
+
+.accept-call {
+  height: 100%;
+  background: green;
+}
+
+.decline-call {
+  height: 100%;
+  background: red;
+}

@@ -14,6 +14,7 @@
     "node-sass": "^4.5.0",
     "ramda": "^0.23.0",
     "sass-loader": "^4.1.1",
+    "simple-peer": "^6.2.1",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
     "style-loader": "^0.13.1",

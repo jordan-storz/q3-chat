@@ -9,6 +9,7 @@ import videoDisplayComponent  from './video-display/video-display.component.js';
 import messagesListComponent  from './messages-list/messages-list.component.js';
 import singleMessageComponent from './single-message/single-message.component.js';
 import messageInputComponent  from './message-input/message-input.component.js';
+import logInComponent         from './log-in/log-in.component.js';
 
 // Directives
 import dragDropDirective      from './directives/drag-drop.directive.js';
@@ -28,6 +29,7 @@ angular.module('chatApp', [])
   .component('messagesList', messagesListComponent)
   .component('singleMessage', singleMessageComponent)
   .component('messageInput', messageInputComponent)
+  .component('logIn', logInComponent)
   .directive('dragDrop', dragDropDirective)
   .service('socket', socketService)
   .service('currentRoom', currentRoomService)
