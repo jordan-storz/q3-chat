@@ -7,7 +7,6 @@ const controller = [function() {
   }
 }];
 
-
 module.exports = {
   template,
   controller

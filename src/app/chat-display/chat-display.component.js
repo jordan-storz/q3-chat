@@ -14,6 +14,7 @@ const controller = [
     vm.minimize = false;
     vm.messages = [];
     vm.users = [];
+    vm.hasAccount = true;
 
     vm.$onInit = function() {
       // socket.emit('first-contact', {url: vm.user.url});
@@ -27,10 +28,8 @@ const controller = [
       })
     }
 
-    socket.on('message-list-and-name', function(data) {
+    socket.on('start-up-info', function(data) {
       //also need back a socket id and a list of users with their socket ids;
-
-
       vm.user.name = data.name;
       vm.messages = data.messageRay;
       $scope.$apply();
@@ -39,7 +38,6 @@ const controller = [
     vm.minimizeBox = function() {
       vm.minimize = !vm.minimize;
     }
-
 
     vm.increaseOpacity = function() {
         let opac = parseFloat($('.chat-room-wrapper ').css('opacity')) + .1;

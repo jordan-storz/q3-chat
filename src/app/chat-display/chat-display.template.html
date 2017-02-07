@@ -1,9 +1,16 @@
+
 <div class="maximize-button"
      ng-show="$ctrl.minimize"
      ng-click="$ctrl.minimizeBox()">Maximize
 </div>
-<div class="chat-room-wrapper" 
+<!-- <log-in ng-show="!$ctrl.minimize && !$ctrl.hasAccount"></log-in> -->
+
+<div class="chat-room-wrapper"
      ng-show="!$ctrl.minimize">
+  <div class="component-container">
+    <log-in></log-in>
+  </div>
+  <log-in></log-in>
   <div class="wrapper">
     <div class="opacity-btn-container flexer space-between" ng-mouseover="$ctrl.opacity()">
       <div class="flexer">
