@@ -1,7 +1,15 @@
-<div class="single-message-container">
+<div class="single-message-container" ng-click="$ctrl.toggleOptions()">
   <h3 class="message-name">{{$ctrl.message.user.username}}: </h3>
   <p class="message-message">{{$ctrl.message.content}}</p>
 </div>
-<div ng-show="false"></div>
-<!-- put an ng-click on the h3 to pop up an options page-let that lets a user
-shitlist, video chat, or whatever to  message.sender -->
+<div>
+  <div class="col-xs-4 flexer"
+    ng-show="$ctrl.showOptions"
+    class="options-with-this-user-box flexer box-me container">
+    <div ng-click="$ctrl.blockUser(user)"
+        class="btn btn-danger col-xs-6">Block User</div>
+    <div ng-click="$ctrl.startVidChat(user)"
+        class="btn btn-info col-xs-6">Video Chat</div>
+    <br>
+  </div>
+</div>
