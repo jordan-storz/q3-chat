@@ -13,7 +13,7 @@ const controller = [
 
     vm.$onInit = function() {
       vm.currentUser = currentUser.get();
-      socket.emit('first-contact', {url: vm.currentUser.room});
+      // socket.emit('first-contact', {url: vm.currentUser.room});
       roomHttp.getRoom().then(response => {
         let room = response.data.room;
         let messages = response.data.messages;
@@ -22,10 +22,11 @@ const controller = [
       })
     }
 
-    socket.on('start-up-info', function(data) {
-      vm.currentUser.socketId = data.socketId;
+    socket.on('initialize-id', function(data) {
+      console.log('INITIALIZEDATA: ');
+      console.log(data);
+      vm.currentUser.socketId = data.id;
       $scope.$apply();
-      console.log(vm.currentUser);
     });
 
     vm.minimizeBox = function() {

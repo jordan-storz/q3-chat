@@ -6,13 +6,21 @@ const controller = ['socket', '$scope', 'currentUser', function(socket, $scope, 
   vm.$onInit = function() {
     vm.currentUser = currentUser.get();
     socket.on(`${vm.currentUser.room}-new-message`, function(data) {
-      vm.messages.push(data);
+      let message = {
+        user: {
+          username: data.name
+        },
+        content: data.message
+      }
+      vm.messages.push(message);
       $scope.$apply();
     })
   }
 
-
-
+  // socket.on(`${vm.currentUser.room}-new-message`, function(data) {
+  //   vm.messages.push(data);
+  //   $scope.$apply();
+  // });
 
 }]
 

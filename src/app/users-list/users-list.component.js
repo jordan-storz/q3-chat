@@ -6,7 +6,7 @@ const controller = [
 function(socket, $scope, currentRoom, roomUsers, currentUser) {
   const vm = this;
   console.log('hello');
-  vm.hideOptionsWithThisUser = true;
+
 
   vm.$onInit = function() {
     console.log('users-list line 17: currentUser');
@@ -50,38 +50,21 @@ function(socket, $scope, currentRoom, roomUsers, currentUser) {
     $scope.$apply();
   })
 
-  socket.on('disconnect-event', function() {
-    //go through user list and remove the id that left
-    //This is probable NOT the best way to do it
-    //Discuss before implementing cuz  dont wanna waste my time
+  socket.on('user-exit', function(data) {
+    console.log('USER EXITED');
+    console.log(vm.users.length);
+    vm.users = vm.users.filter(user => user.socketId !== data.socketId);
+    console.log(vm.users.length);
+    $scope.$apply();
   })
 
-  vm.displayOptionsWithThisUser = function() {
-    vm.hideOptionsWithThisUser = !vm.hideOptionsWithThisUser;
-    console.log(vm.hideOptionsWithThisUser);
-  }
+
 
   vm.changeName = function() {
     console.log('changing name');
   }
 
-  vm.blockUser = function(user) {
-    console.log(`blocking: ${user.name}`);
-    console.log(user);
-  }
 
-  vm.startVidChat = function(user) {
-    console.log('Start video chat', user);
-    vm.isOnCall = true;
-    vm.currentUser.initiator = true;
-    console.log(vm.currentUser);
-    let obj = {
-      fromId: vm.currentUser.socketId,
-      toId: user.socketId,
-      fromkey: 'key'
-    }
-    socket.emit('request-video-chat', obj);
-  }
 
   //******** Video Requester functions **************
 
