@@ -1,23 +1,41 @@
 import template from './users-list.template.html';
+import R from 'ramda';
 
-const controller = function(socket, $scope, currentRoom) {
+const controller = [
+'socket', '$scope', 'currentRoom', 'roomUsers', 'currentUser',
+function(socket, $scope, currentRoom, roomUsers, currentUser) {
   const vm = this;
   console.log('hello');
-  vm.users = [{name: "bob", socketId: 'asfscfs23', room: currentRoom.is()}];
   vm.hideOptionsWithThisUser = true;
 
   vm.$onInit = function() {
     console.log('users-list line 17: currentUser');
     console.log(vm.currentUser);
-    socket.emit('get-users', vm.currentUser);
+    vm.users = roomUsers.users;
+    vm.currentUser = currentUser.get();
     socket.emit('new-user', vm.currentUser);
 
-    socket.on(`${vm.currentUser.room}-add-new-user`, function(user) {
-      //if(user.socketId !== vm.currentUser.socketId) {
+    socket.on(`${vm.currentUser.room}-echo-whos-here`, function(user) {
+      // vm.users.push(user);
+      console.log('responding to whos here');
+      if (vm.currentUser.name) {
+        socket.emit('im-here', vm.currentUser);
+      }
+    });
+
+    socket.on(`${vm.currentUser.room}-add-user`, function(user) {
+      console.log('add user:');
+      console.log(user);
+      let userNames = R.pluck('name', vm.users);
+      let contains = R.contains(user.name, userNames);
+      console.log(vm.users);
+      if (!contains && (user.name !== vm.currentUser.name)) {
+        console.log('pushing user');
         vm.users.push(user);
+        console.log(R.pluck('name', vm.users));
         $scope.$apply();
-      //}
-    })
+      }
+    });
 
     socket.on(`${vm.currentUser.socketId}-request-chat-request`, function(data) {
       console.log('recieving video chat request');
@@ -74,13 +92,12 @@ const controller = function(socket, $scope, currentRoom) {
 
 
 
-}
+}]
 
 module.exports = {
   template,
   controller,
   bindings: {
-    currentUser: '=',
     isOnCall: '='
   }
 }

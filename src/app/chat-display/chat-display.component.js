@@ -3,8 +3,8 @@ import template from './chat-display.template.html';
 import R from 'ramda';
 
 const controller = [
-  'socket', '$scope', 'roomHttp',
-  function(socket, $scope, roomHttp) {
+  'socket', '$scope', 'roomHttp', 'currentUser',
+  function(socket, $scope, roomHttp, currentUser) {
     const vm = this;
     vm.minimize = false;
     vm.messages = [];
@@ -12,6 +12,7 @@ const controller = [
     vm.showLogIn = true;
 
     vm.$onInit = function() {
+      vm.currentUser = currentUser.get();
       socket.emit('first-contact', {url: vm.currentUser.room});
       roomHttp.getRoom().then(response => {
         let room = response.data.room;
@@ -49,7 +50,6 @@ module.exports = {
     template,
     controller,
     bindings: {
-      currentUser: '=',
       isOnCall: '='
     }
 }

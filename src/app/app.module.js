@@ -20,6 +20,8 @@ import currentRoomService     from './services/current-room.service.js';
 import messageHttpService     from './services/message-http.service.js';
 import userHttpService        from './services/user-http.service.js';
 import roomHttpService        from './services/room-http.service.js';
+import roomUsersService       from './services/room-users.service.js';
+import currentUserService     from './services/current-user.service.js';
 
 angular.module('chatApp', [])
   .component('mainComponent', mainComponent)
@@ -36,3 +38,5 @@ angular.module('chatApp', [])
   .service('messageHttp', messageHttpService)
   .service('userHttp', userHttpService)
   .service('roomHttp', roomHttpService)
+  .service('roomUsers', roomUsersService)
+  .service('currentUser', currentUserService)

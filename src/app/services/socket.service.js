@@ -7,5 +7,5 @@ module.exports = function() {
     socket.emit('first-contact', obj);
   }
 
-  return io.connect('http://127.0.0.1:4200');
+  return io.connect('https://mj-sockets.herokuapp.com/');
 }

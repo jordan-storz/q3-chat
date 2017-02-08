@@ -1,9 +1,10 @@
 import template from './message-input.template.html';
 
-const controller = function(socket) {
+const controller = ['$scope', 'currentUser', 'socket', function($scope, currentUser, socket) {
     const vm = this;
 
     vm.$onInit = function() {
+      vm.currentUser = currentUser.get();
       console.log(vm.currentUser);
     }
 
@@ -15,13 +16,12 @@ const controller = function(socket) {
       }
     }
 
-}
+}]
 
 module.exports = {
     template,
     controller,
     bindings: {
-      currentUser: '=',
       isOnCall: '='
     }
 }

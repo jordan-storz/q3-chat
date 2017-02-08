@@ -1,7 +1,7 @@
 import template from './video-display.template.html';
 let Peer = require('simple-peer');
 
-const controller = function(socket, $scope) {
+const controller = ['socket', '$scope', 'currentUser', function(socket, $scope, currentUser) {
   const vm = this;
 
 
@@ -12,6 +12,7 @@ const controller = function(socket, $scope) {
   $('.michael-jordan-video-screen').css('height', height);
 
   vm.$onInit = function() {
+    vm.currentUser = currentUser.get();
     vm.acceptOrDecline = !vm.currentUser.initiator;
     console.log('vm.acceptOrDecline: ', vm.acceptOrDecline);
     console.log(vm.currentUser);
@@ -52,13 +53,12 @@ const controller = function(socket, $scope) {
     vm.isOnCall = false;
   }
 
-}
+}]
 
 module.exports = {
   template,
   controller,
   bindings: {
-    currentUser: '=',
     isOnCall: '='
   }
 }

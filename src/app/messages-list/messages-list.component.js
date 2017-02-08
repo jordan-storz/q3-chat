@@ -1,9 +1,10 @@
 import template from './messages-list.template.html';
 
-const controller = function(socket, $scope) {
+const controller = ['socket', '$scope', 'currentUser', function(socket, $scope, currentUser) {
   const vm = this;
 
   vm.$onInit = function() {
+    vm.currentUser = currentUser.get();
     socket.on(`${vm.currentUser.room}-new-message`, function(data) {
       vm.messages.push(data);
       $scope.$apply();
@@ -13,14 +14,13 @@ const controller = function(socket, $scope) {
 
 
 
-}
+}]
 
 module.exports = {
   template,
   controller,
   bindings: {
     messages: "=",
-    currentUser: '=',
     isOnCall: '='
   }
 }

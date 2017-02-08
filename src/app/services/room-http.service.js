@@ -1,6 +1,6 @@
 module.exports = ['$http', 'currentRoom', function($http, currentRoom) {
   const service = this;
-  const endpoint = 'http://localhost:5200/api';
+  const endpoint = 'https://mj-data.herokuapp.com/api';
 
   service.getRoom = function () {
     let roomName = currentRoom.is();
