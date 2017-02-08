@@ -1,0 +1,12 @@
+<div class="single-user flexer container col-xs-12">
+  <h5 class="col-xs-8"
+      ng-click="$ctrl.displayOptionsWithThisUser()">{{$ctrl.user.name}}</h5>
+  <div class="col-xs-4 flexer"
+    ng-show="!$ctrl.hideOptionsWithThisUser"
+    class="options-with-this-user-box flexer box-me container">
+    <div ng-click="$ctrl.blockUser(user)"
+        class="btn btn-danger col-xs-6">Block User</div>
+    <div ng-click="$ctrl.startVidChat(user)"
+        class="btn btn-info col-xs-6">Video Chat</div>
+  </div>
+</div>
