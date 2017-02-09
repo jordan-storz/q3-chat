@@ -1,11 +1,11 @@
 <div class="michael-jordan-video-chat-wrapper box-me container col-xs-3"
-    ng-show="$ctrl.isOnCall">
+    ng-show="$ctrl.currentUser.isOnCall">
 
-  <div class="answer-options flexer" ng-show="!$ctrl.acceptOrDecline">
-    <div class="accept-call">Accept</div>
+  <div class="answer-options flexer" ng-show="$ctrl.currentUser.acceptOrDecline">
+    <div class="accept-call" ng-click="$ctrl.answerCall()">Accept</div>
     <div class="decline-call">Decline</div>
   </div>
-  <video class="michael-jordan-screen col-xs-12 box-me" ng-show="$ctrl.acceptOrDecline" controls>
+  <video class="michael-jordan-screen col-xs-12 box-me" ng-show="!$ctrl.currentUser.acceptOrDecline" controls>
     <source src="https://www.youtube.com/watch?v=woJrjb91pW4ub" type="">
   </video>
 

@@ -36,13 +36,6 @@ function(socket, $scope, currentRoom, roomUsers, currentUser) {
         $scope.$apply();
       }
     });
-
-    socket.on(`${vm.currentUser.socketId}-request-chat-request`, function(data) {
-      console.log('recieving video chat request');
-      vm.currentUser.initiator = false;
-      vm.isOnCall = true;
-      $scope.$apply();
-    });
   }
 
   socket.on('user-list', function(data) {
@@ -63,17 +56,6 @@ function(socket, $scope, currentRoom, roomUsers, currentUser) {
   vm.changeName = function() {
     console.log('changing name');
   }
-
-
-
-  //******** Video Requester functions **************
-
-
-
-
-  //*********** video Requestee functions ***********
-
-
 
 }]
 

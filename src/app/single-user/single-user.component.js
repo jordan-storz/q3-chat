@@ -1,8 +1,8 @@
 import template from './single-user.template.html';
 
 const controller = [
-  '$scope', 'currentUser', 'socket',
-  function($scope, currentUser, socket) {
+  '$rootScope', '$scope', 'currentUser', 'socket', 'videoChat',
+  function($rootScope, $scope, currentUser, socket, videoChat) {
   const vm = this;
 
   vm.$onInit = function () {
@@ -22,15 +22,10 @@ const controller = [
 
   vm.startVidChat = function(user) {
     console.log('Start video chat', user);
-    vm.isOnCall = true;
+    vm.currentUser.isOnCall = true;
+    vm.acceptOrDecline = false;
     vm.currentUser.initiator = true;
-    console.log(vm.currentUser);
-    let obj = {
-      fromId: vm.currentUser.socketId,
-      toId: user.socketId,
-      fromkey: 'key'
-    }
-    socket.emit('request-video-chat', obj);
+    videoChat.powerOn(vm.user);
   }
 }];
 

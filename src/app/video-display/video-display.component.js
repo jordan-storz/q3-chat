@@ -1,7 +1,7 @@
 import template from './video-display.template.html';
 let Peer = require('simple-peer');
 
-const controller = ['socket', '$scope', 'currentUser', function(socket, $scope, currentUser) {
+const controller = ['socket', '$scope', 'currentUser', 'videoChat', function(socket, $scope, currentUser, videoChat) {
   const vm = this;
 
 
@@ -13,39 +13,32 @@ const controller = ['socket', '$scope', 'currentUser', function(socket, $scope, 
 
   vm.$onInit = function() {
     vm.currentUser = currentUser.get();
-    vm.acceptOrDecline = !vm.currentUser.initiator;
+    vm.acceptOrDecline = false;
     console.log('vm.acceptOrDecline: ', vm.acceptOrDecline);
     console.log(vm.currentUser);
-
-    vm.gotMedia = function(stream) {
-      vm.peer = new Peer({
-          initiator: vm.currentUser.initiator,
-          trickle: false,
-          stream: stream
-      })
-
-      vm.peer.on('signal', function (data) {
-        //document.querySelector('#outgoing').textContent = JSON.stringify(data)
-        vm.outgoing = JSON.stringify(data);
-        $scope.$apply();
-      })
-
-      // document.querySelector('form').addEventListener('submit', function (ev) {
-      //   ev.preventDefault()
-      //   vm.peer.signal(JSON.parse(document.querySelector('#incoming').value))
-      // })
-
-      vm.peer.on('stream', function (stream) {
-        var video = document.querySelector('video')
-        video.src = window.URL.createObjectURL(stream)
-        $scope.$apply
-        video.play()
-      })
-    }
-
-    navigator.getUserMedia({ video: true, audio: true }, vm.gotMedia, function () {})
-
   }
+
+
+  socket.on('initialize-id', function(data) {
+    vm.currentUser.socketId = data.id;
+    socket.on(`${vm.currentUser.socketId}-incoming-call`, function(obj) {
+      console.log("RECEIVING CALL");
+      vm.currentUser.isOnCall = true;
+      vm.currentUser.acceptOrDecline = true;
+      vm.currentUser.initiator = false;
+      $scope.$apply();
+      vm.answerCall = function () {
+        vm.currentUser.acceptOrDecline = false;
+        videoChat.powerOn(obj);
+      }
+    });
+    socket.on(`${vm.currentUser.socketId}-accepted-call`, function(obj) {
+      console.log("THEY ACCEPTED YOUR CALL!!!!");
+      videoChat.makeCallHappen(obj);
+    });
+    $scope.$apply();
+  });
+
 
   vm.hangUp = function() {
     console.log('hanging up');

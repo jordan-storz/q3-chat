@@ -22,13 +22,6 @@ const controller = [
       })
     }
 
-    socket.on('initialize-id', function(data) {
-      console.log('INITIALIZEDATA: ');
-      console.log(data);
-      vm.currentUser.socketId = data.id;
-      $scope.$apply();
-    });
-
     vm.minimizeBox = function() {
       vm.minimize = !vm.minimize;
     }

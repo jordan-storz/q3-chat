@@ -16,13 +16,7 @@ const controller = ['socket', '$scope', 'currentUser', function(socket, $scope, 
       $scope.$apply();
     })
   }
-
-  // socket.on(`${vm.currentUser.room}-new-message`, function(data) {
-  //   vm.messages.push(data);
-  //   $scope.$apply();
-  // });
-
-}]
+}];
 
 module.exports = {
   template,

@@ -23,6 +23,7 @@ import userHttpService        from './services/user-http.service.js';
 import roomHttpService        from './services/room-http.service.js';
 import roomUsersService       from './services/room-users.service.js';
 import currentUserService     from './services/current-user.service.js';
+import videoChatService       from './services/video-chat.service.js';
 
 angular.module('chatApp', [])
   .component('mainComponent', mainComponent)
@@ -42,3 +43,4 @@ angular.module('chatApp', [])
   .service('roomHttp', roomHttpService)
   .service('roomUsers', roomUsersService)
   .service('currentUser', currentUserService)
+  .service('videoChat', videoChatService)
