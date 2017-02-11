@@ -1,26 +1,24 @@
-
+<!--
 <div class="maximize-button"
      ng-show="$ctrl.minimize"
      ng-click="$ctrl.minimizeBox()">Maximize
-</div>
+</div> -->
 <!-- <log-in ng-show="!$ctrl.minimize && !$ctrl.hasAccount"></log-in> -->
 
-<div class="chat-room-wrapper"
-     ng-show="!$ctrl.minimize">
-  <div class="component-container">
-    <log-in show-log-in=$ctrl.showLogIn></log-in>
-  </div>
-  <div class="wrapper">
-    <div class="opacity-btn-container flexer space-between" ng-mouseover="$ctrl.opacity()">
-      <div class="flexer">
-        <i id="increment-chat-opacity" class="glyphicon glyphicon-plus" ng-click="$ctrl.increaseOpacity()"></i>
-        <i id="decrement-chat-opacity" class="glyphicon glyphicon-minus" ng-click="$ctrl.decreaseOpacity()"></i>
-      </div>
-      <button ng-click="$ctrl.minimizeBox()"
-          class="minimize-btn">MIN
-      </button>
-    </div>
-    <messages-list messages=$ctrl.messages></messages-list>
-  </div>
-</div>
+
+<log-in show-log-in=$ctrl.showLogIn></log-in>
+
+
+  <!-- <div class="opacity-btn-container flexer space-between" ng-mouseover="$ctrl.opacity()"> -->
+    <!-- <div class="flexer">
+      <i id="increment-chat-opacity" class="glyphicon glyphicon-plus" ng-click="$ctrl.increaseOpacity()"></i>
+      <i id="decrement-chat-opacity" class="glyphicon glyphicon-minus" ng-click="$ctrl.decreaseOpacity()"></i>
+    </div> -->
+    <!-- <button ng-click="$ctrl.minimizeBox()" class="minimize-btn">
+      MIN
+    </button> -->
+  <!-- </div> -->
+  <messages-list messages=$ctrl.messages></messages-list>
+
+
 <message-input ng-show="!$ctrl.minimize"></message-input>
