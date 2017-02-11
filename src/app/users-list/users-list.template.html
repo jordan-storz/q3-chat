@@ -1,13 +1,12 @@
-<div class="row">
 
-  <div class="this-user flexer container col-xs-12">
-    <h4 class="col-xs-9" on-click="$ctrl.changeName()">{{$ctrl.currentUser.name}}</h4>
-    <div class="btn btn-primary col-xs-3"
-        ng-click="$ctrl.changeName()">Change
-    </div>
-  </div>
+<h4 on-click="$ctrl.changeName()">{{$ctrl.currentUser.name}}</h4>
+  <!-- <div class="btn btn-primary col-xs-3"
+      ng-click="$ctrl.changeName()">Change
+  </div> -->
 
 
-  <single-user ng-repeat="user in $ctrl.users" user=user></single-user>
-  
-</div>
+<ul>
+  <li ng-repeat="user in $ctrl.users">
+    <single-user user=user></single-user>
+  </li>
+</ul>

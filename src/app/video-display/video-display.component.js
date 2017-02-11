@@ -13,6 +13,7 @@ const controller = ['socket', '$scope', 'currentUser', 'videoChat', function(soc
 
   vm.$onInit = function() {
     vm.currentUser = currentUser.get();
+    vm.isOnCall = true; // TEMPORARY
     vm.acceptOrDecline = false;
     console.log('vm.acceptOrDecline: ', vm.acceptOrDecline);
     console.log(vm.currentUser);
