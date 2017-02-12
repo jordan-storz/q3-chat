@@ -3,7 +3,7 @@ module.exports = [
     const service = this;
     let defaultState = {
       room: '',
-      isOnCall: true,
+      isOnCall: false,
     }
 
     return defaultState;
