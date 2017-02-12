@@ -1,15 +1,18 @@
 import R from 'ramda';
 
-module.exports = ['currentRoom', function(currentRoom) {
+module.exports = ['currentRoom', 'storage', function(currentRoom, storage) {
   const service = this;
+  let user;
 
-  currentRoom.get().then(room => service.currentRoom = room);
-  let user = {room: service.currentRoom};
+  service.get = () => {
+    return user || storage.getCurrentUser();
+  };
 
-  service.get = () => user;
   service.set = (propObj) => {
     R.keys(propObj).forEach(key => {
       user[key] = propObj[key];
     });
+    storage.setCurrentUser(user);
   }
+
 }];
