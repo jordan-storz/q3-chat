@@ -11,6 +11,7 @@ module.exports = ['$location', function($location) {
   service.get = function () {
     return new Promise((resolve, reject) => {
       let r = resolve;
+      return r($location.absUrl());
       if (exists(roomUrl)) {
         r(roomUrl);
       } else if (exists(chrome.tabs)) {

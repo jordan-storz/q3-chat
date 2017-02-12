@@ -1,7 +1,7 @@
 import $ from "jquery";
 import template from './chat-display.template.html';
 import R from 'ramda';
-
+ 
 const controller = [
   'socket', '$scope', 'roomHttp', 'currentUser',
   function(socket, $scope, roomHttp, currentUser) {

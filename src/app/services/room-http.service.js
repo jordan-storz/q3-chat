@@ -3,7 +3,7 @@ module.exports = ['$http', 'currentRoom', function($http, currentRoom) {
   const endpoint = 'https://mj-data.herokuapp.com/api';
 
   service.getRoom = function () {
-    currentRoom.get()
+    return currentRoom.get()
       .then(room => {
         service.currentRoom = room
         return `/rooms/${room}`;
