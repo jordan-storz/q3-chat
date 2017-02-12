@@ -21,7 +21,6 @@ const controller = [
   }
 
   vm.startVidChat = function(user) {
-    console.log('Start video chat', user);
     vm.currentUser.isOnCall = true;
     vm.acceptOrDecline = false;
     vm.currentUser.initiator = true;

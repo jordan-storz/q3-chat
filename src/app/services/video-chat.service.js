@@ -15,7 +15,7 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
   service.powerOn = function (user) {
     service.gotMedia = function(stream) {
       console.log('GOT MEDIA');
-      console.log(service.currentUser.initiator);
+      console.log(currentUser);
       service.peer = new Peer({
         initiator: service.currentUser.initiator,
         trickle: false,
@@ -28,9 +28,6 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
 
 
       service.peer.on('signal', function (data) {
-        console.log('USERRRR');
-        console.log(user);
-        //document.querySelector('#outgoing').textContent = JSON.stringify(data)
         if (service.currentUser.initiator) {
           let obj = {
             fromId: service.currentUser.socketId,
@@ -44,7 +41,6 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
             toId: user.fromId,
             fromKey: JSON.stringify(data)
           }
-          console.log("SENDING ACCEPT");
           socket.emit('accept-video-chat', obj);
         }
       });

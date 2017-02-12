@@ -1,7 +1,7 @@
-<div class="michael-jordan-video-chat-wrapper box-me container col-xs-3"
-    ng-show="$ctrl.appState.isOnCall">
+<div class="video-display-wrapper box-me container col-xs-3"
+    ng-show="$ctrl.isOnCall">
 
-  <div class="answer-options flexer" ng-show="$ctrl.appState.acceptOrDecline">
+  <div class="answer-options flexer" ng-show="$ctrl.acceptOrDecline">
     <div class="accept-call" ng-click="$ctrl.answerCall()">Accept</div>
     <div class="decline-call">Decline</div>
   </div>

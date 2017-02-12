@@ -15,24 +15,25 @@ const controller = [
 
   vm.$onInit = function() {
     vm.currentUser = currentUser;
-    vm.appState = appState;
-    vm.isOnCall = true; // TEMPORARY
+    vm.isOnCall = false;
     vm.acceptOrDecline = false;
   }
 
 
   socketListeners.on('incoming-call', function(obj) {
-    console.log('INCOMING CALL');
-    appState.isOnCall = true;
-    vm.appState.acceptOrDecline = true;
+    vm.isOnCall = true;
+    vm.acceptOrDecline = true;
     vm.answerCall = function () {
-      vm.appState.acceptOrDecline = false;
+      vm.acceptOrDecline = false;
       videoChat.powerOn(obj);
     }
+    $scope.$apply();
   });
 
   socketListeners.on('accepted-call', function(obj) {
+    vm.isOnCall = true;
     videoChat.makeCallHappen(obj);
+    $scope.$apply();
   });
 
   vm.hangUp = function() {
@@ -47,6 +48,5 @@ module.exports = {
   template,
   controller,
   bindings: {
-    isOnCall: '='
   }
 }

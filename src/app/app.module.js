@@ -25,8 +25,8 @@ import roomUsersService       from './services/room-users.service.js';
 import currentUserService     from './services/current-user.service.js';
 import videoChatService       from './services/video-chat.service.js';
 import storageService         from './services/storage.service.js';
-import applicationStateService from './services/application-state.service.js';
-import socketListenersService  from './services/socket-listeners.service.js';
+import applicationStateService  from './services/application-state.service.js';
+import socketListenersService   from './services/socket-listeners.service.js';
 
 angular.module('chatApp', [])
   .component('mainComponent', mainComponent)

@@ -42,9 +42,10 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
       emit('initialize-id', data);
       socket.on(`${data.id}-incoming-call`, function(obj) {
         console.log('incomingcall');
+        console.log(obj);
         emit('incoming-call', obj);
       });
-      socket.on(`${data.socketId}-accepted-call`, function(obj) {
+      socket.on(`${data.id}-accepted-call`, function(obj) {
         emit('accepted-call', obj);
         console.log("THEY ACCEPTED YOUR CALL!!!!");
       });
