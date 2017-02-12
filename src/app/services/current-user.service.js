@@ -1,18 +1,22 @@
 import R from 'ramda';
 
-module.exports = ['currentRoom', 'storage', function(currentRoom, storage) {
+module.exports = [
+  'currentRoom', 'storage', 'appState',
+  function(currentRoom, storage) {
   const service = this;
-  let user;
+  let user = {}
 
-  service.get = () => {
-    return user || storage.getCurrentUser();
-  };
-
-  service.set = (propObj) => {
-    R.keys(propObj).forEach(key => {
-      user[key] = propObj[key];
-    });
-    storage.setCurrentUser(user);
+  function initialize() {
+    let localUser = storage.getCurrentUser();
+    if (!localUser) {
+      appState.loggedIn = false;
+      user = {};
+    } else {
+      user = localUser;
+      appState.loggedIn = true;
+    }
   }
+
+  return user;
 
 }];

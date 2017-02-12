@@ -6,7 +6,7 @@ const controller = [
   const vm = this;
 
   vm.$onInit = function () {
-    vm.currentUser = currentUser.get();
+    vm.currentUser = currentUser;
     vm.hideOptionsWithThisUser = true;
   }
 

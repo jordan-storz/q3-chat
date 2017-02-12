@@ -1,7 +1,9 @@
 import template from './video-display.template.html';
 let Peer = require('simple-peer');
 
-const controller = ['socket', '$scope', 'currentUser', 'videoChat', function(socket, $scope, currentUser, videoChat) {
+const controller = [
+  'socket', '$scope', 'currentUser', 'videoChat', 'appState', 'socketListeners',
+    function(socket, $scope, currentUser, videoChat, appState, socketListeners) {
   const vm = this;
 
 
@@ -12,39 +14,31 @@ const controller = ['socket', '$scope', 'currentUser', 'videoChat', function(soc
   $('.michael-jordan-video-screen').css('height', height);
 
   vm.$onInit = function() {
-    vm.currentUser = currentUser.get();
+    vm.currentUser = currentUser;
+    vm.appState = appState;
     vm.isOnCall = true; // TEMPORARY
     vm.acceptOrDecline = false;
-    console.log('vm.acceptOrDecline: ', vm.acceptOrDecline);
-    console.log(vm.currentUser);
   }
 
 
-  socket.on('initialize-id', function(data) {
-    vm.currentUser.socketId = data.id;
-    socket.on(`${vm.currentUser.socketId}-incoming-call`, function(obj) {
-      console.log("RECEIVING CALL");
-      vm.currentUser.isOnCall = true;
-      vm.currentUser.acceptOrDecline = true;
-      vm.currentUser.initiator = false;
-      $scope.$apply();
-      vm.answerCall = function () {
-        vm.currentUser.acceptOrDecline = false;
-        videoChat.powerOn(obj);
-      }
-    });
-    socket.on(`${vm.currentUser.socketId}-accepted-call`, function(obj) {
-      console.log("THEY ACCEPTED YOUR CALL!!!!");
-      videoChat.makeCallHappen(obj);
-    });
-    $scope.$apply();
+  socketListeners.on('incoming-call', function(obj) {
+    console.log('INCOMING CALL');
+    appState.isOnCall = true;
+    vm.appState.acceptOrDecline = true;
+    vm.answerCall = function () {
+      vm.appState.acceptOrDecline = false;
+      videoChat.powerOn(obj);
+    }
   });
 
+  socketListeners.on('accepted-call', function(obj) {
+    videoChat.makeCallHappen(obj);
+  });
 
   vm.hangUp = function() {
     console.log('hanging up');
     //Do the simplepeer.js stuff needed to disconnect
-    vm.isOnCall = false;
+    appState.isOnCall = false;
   }
 
 }]

@@ -2,27 +2,30 @@ import template from './users-list.template.html';
 import R from 'ramda';
 
 const controller = [
-'socket', '$scope', 'currentRoom', 'roomUsers', 'currentUser',
-function(socket, $scope, currentRoom, roomUsers, currentUser) {
+'socket', '$scope', 'currentRoom', 'roomUsers', 'currentUser', 'appState',
+'socketListeners',
+function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketListeners) {
   const vm = this;
-  console.log('hello');
-
 
   vm.$onInit = function() {
-    currentRoom.get().then(room => vm.currentRoom = room);
+    console.log('ON INIT');
+    vm.appState = appState;
     vm.users = roomUsers.users;
-    vm.currentUser = currentUser.get();
+    vm.currentUser = currentUser;
     socket.emit('new-user', vm.currentUser);
-
-    socket.on(`${vm.currentUser.room}-echo-whos-here`, function(user) {
-      // vm.users.push(user);
+    socketListeners.on('room-echo-whos-here', function(info) {
+      vm.users.push(info.user);
       console.log('responding to whos here');
-      if (vm.currentUser.name) {
-        socket.emit('im-here', vm.currentUser);
+      console.log(info);
+      console.log(vm.users);
+      if (currentUser.username) {
+        socket.emit('im-here', currentUser);
       }
+      $scope.$apply();
     });
 
-    socket.on(`${vm.currentUser.room}-add-user`, function(user) {
+
+    socketListeners.on('room-add-user', function(user) {
       console.log('add user:');
       console.log(user);
       let userNames = R.pluck('name', vm.users);
@@ -37,20 +40,16 @@ function(socket, $scope, currentRoom, roomUsers, currentUser) {
     });
   }
 
-  socket.on('user-list', function(data) {
+
+  socketListeners.on('user-list', function(data) {
     vm.users = data.users
     $scope.$apply();
-  })
+  });
 
   socket.on('user-exit', function(data) {
-    console.log('USER EXITED');
-    console.log(vm.users.length);
     vm.users = vm.users.filter(user => user.socketId !== data.socketId);
-    console.log(vm.users.length);
     $scope.$apply();
-  })
-
-
+  });
 
   vm.changeName = function() {
     console.log('changing name');

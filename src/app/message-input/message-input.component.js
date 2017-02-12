@@ -1,17 +1,22 @@
 import template from './message-input.template.html';
+import R from 'ramda';
 
-const controller = ['$scope', 'currentUser', 'socket', function($scope, currentUser, socket) {
+const controller = [
+  '$scope', 'currentUser', 'socket', 'appState',
+  function($scope, currentUser, socket, appState) {
     const vm = this;
 
-    vm.$onInit = function() {
-      vm.currentUser = currentUser.get();
-      console.log(vm.currentUser);
-    }
+    vm.$onInit = function() {}
 
     vm.sendMessage = function() {
+      console.log(appState);
       if(vm.messageArea !== '') {
-        vm.currentUser.message = vm.messageArea;
-        socket.emit('send-message', vm.currentUser);
+        let messageInfo = {
+          username: currentUser.username,
+          room: appState.room,
+          message: vm.messageArea
+        };
+        socket.emit('send-message', messageInfo);
         vm.messageArea = '';
       }
     }

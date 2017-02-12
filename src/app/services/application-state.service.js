@@ -1,18 +1,10 @@
 module.exports = [
   'storage', 'currentRoom', function storageService(storage, currentRoom) {
     const service = this;
-    let applicationState = {
+    let defaultState = {
       room: '',
-      isOnCall: false,
+      isOnCall: true,
     }
 
-
-    return function getSet(prop, val) {
-      if (!!val) {
-        applicationState[prop] = val;
-        return applicationState[prop];
-      } else {
-        return applicationState[prop];
-      }
-    }
+    return defaultState;
 }];

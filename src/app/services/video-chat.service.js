@@ -3,7 +3,7 @@ const Peer = require('simple-peer');
 module.exports = ['socket', 'currentUser', function(socket, currentUser) {
   const service = this;
 
-  service.currentUser = currentUser.get();
+  service.currentUser = currentUser;
   service.state = {
 
   }

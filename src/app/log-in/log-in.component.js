@@ -1,7 +1,10 @@
 import $ from "jquery";
 import template from './log-in.template.html';
+import R from 'ramda';
 
-const controller = ['socket', 'roomUsers', 'currentUser', function(socket, roomUsers, currentUser) {
+const controller = [
+  'socket', 'roomUsers', 'currentUser', 'appState',
+  function(socket, roomUsers, currentUser, appState) {
   const vm = this;
 
   vm.$onInit = function () {
@@ -13,11 +16,12 @@ const controller = ['socket', 'roomUsers', 'currentUser', function(socket, roomU
   }
 
   vm.doLogIn = function() {
-    currentUser.set({
-      name: vm.username
-    })
-
-    socket.emit('whos-here', currentUser.get());
+    currentUser.username = vm.username;
+    let info = {
+      room: appState.room,
+      user: currentUser
+    }
+    socket.emit('whos-here', info);
     vm.showLogIn = false; // if it doesnt pass the backend validation dont do this
   }
 }];
