@@ -1,15 +1,18 @@
-<div class="single-message-container" ng-click="$ctrl.toggleOptions()">
-  <h3 class="message-name">{{$ctrl.message.user.username}}: </h3>
-  <p class="message-message">{{$ctrl.message.content}}</p>
-</div>
-<div>
-  <div class="col-xs-4 flexer"
-    ng-show="$ctrl.showOptions"
-    class="options-with-this-user-box flexer box-me container">
-    <div ng-click="$ctrl.blockUser(user)"
-        class="btn btn-danger col-xs-6">Block User</div>
-    <div ng-click="$ctrl.startVidChat(user)"
-        class="btn btn-info col-xs-6">Video Chat</div>
-    <br>
+<div class="wrapper">
+  <div class="single-message-container" ng-click="$ctrl.toggleOptions()">
+    <p class="message-username">{{$ctrl.message.user.username}}: </p>
+    <p class="message-message">{{$ctrl.message.content}}</p>
   </div>
+  <div>
+    <div class="col-xs-4 flexer"
+      ng-show="$ctrl.showOptions"
+      class="options-with-this-user-box flexer box-me container">
+      <div ng-click="$ctrl.blockUser(user)"
+          class="btn btn-danger col-xs-6">Block User</div>
+      <div ng-click="$ctrl.startVidChat(user)"
+          class="btn btn-info col-xs-6">Video Chat</div>
+      <br>
+    </div>
+  </div>
+
 </div>

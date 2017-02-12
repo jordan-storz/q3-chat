@@ -52,7 +52,6 @@ users-display {
 
 div.interface {
   flex-grow: 2;
-  padding-left: 1rem;
   chat-display {
     message-input {
       padding: 0 1rem;
@@ -66,14 +65,34 @@ div.interface {
     textarea {
       height: 9rem;
     }
+    single-message {
+      > .wrapper {
+        border-bottom: 1px solid gray;
+        padding: 1.7rem 0;
+        padding-left: 0.7rem;
+      }
+      * {
+        margin: 0;
+      }
+      p {
+        display: inline-block;
+      }
+      .message-username {
+        font-weight: bold;
+      }
+    }
   }
 
   log-in {
-    * {
-      margin: 0;
-    }
-    form {
-      @include flex-column-center;
+    > div {
+      padding: 1rem;
+      * {
+        margin: 0;
+        text-align: center;
+      }
+      button {
+        margin-top: 1.3rem;
+      }
     }
   }
 

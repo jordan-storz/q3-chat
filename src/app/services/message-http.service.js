@@ -3,11 +3,13 @@ module.exports = ['$http', 'currentRoom', function($http, currentRoom) {
   const apiPoint = 'localhost:4200/api/messages';
 
   const makeUrl = function() {
-    let roomName = currentRoom.is();
-    return `${apiPoint}?roomName=${roomName}`
+    currentRoom.get().then(room => {
+      service.currentRoom = room
+      return `${apiPoint}?roomName=${roomName}`;
+    });
   }
 
   service.getMessages = function() {
-    return $http.get(makeUrl());
+    sevice.makeUrl().then($http.get);
   }
 }];

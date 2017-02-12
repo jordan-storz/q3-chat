@@ -9,8 +9,7 @@ function(socket, $scope, currentRoom, roomUsers, currentUser) {
 
 
   vm.$onInit = function() {
-    console.log('users-list line 17: currentUser');
-    console.log(vm.currentUser);
+    currentRoom.get().then(room => vm.currentRoom = room);
     vm.users = roomUsers.users;
     vm.currentUser = currentUser.get();
     socket.emit('new-user', vm.currentUser);

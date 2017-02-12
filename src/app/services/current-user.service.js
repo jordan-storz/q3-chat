@@ -3,7 +3,8 @@ import R from 'ramda';
 module.exports = ['currentRoom', function(currentRoom) {
   const service = this;
 
-  let user = {room: currentRoom.is()};
+  currentRoom.get().then(room => service.currentRoom = room);
+  let user = {room: service.currentRoom};
 
   service.get = () => user;
   service.set = (propObj) => {

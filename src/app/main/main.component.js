@@ -4,6 +4,7 @@ const controller = ['currentRoom', 'currentUser', function(currentRoom, currentU
   const vm = this;
 
   vm.$onInit = function() {
+    currentRoom.get().then(room => vm.currentRoom = room);
     vm.currentUser = currentUser.get();
     vm.isOnCall = false;
   }

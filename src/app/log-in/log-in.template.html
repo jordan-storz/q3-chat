@@ -1,13 +1,15 @@
-<div class="michael-jordan-log-in box-me" ng-show="$ctrl.showLogIn">
+<div class="michael-jordan-log-in" ng-show="$ctrl.showLogIn">
   <!-- <div class="michael-jordan-log-in-backscreen box-me"> -->
     <h5>Join the chat!</h5>
     <form ng-submit="$ctrl.doLogIn()" class="michael-jordan-form box-me" name="sumbit-form">
       <label for="michael-jordan-get-username"></label><br>
       <input id="michael-jordan-get-username"
-          ng-model="$ctrl.username" type="text" name="get-name"><br>
+          ng-model="$ctrl.username" type="text" name="get-name"
+          placeholder="username"><br>
       <label for="michael-jordan-get-password"></label><br>
       <input id="michael-jordan-get-user-password"
-          ng-model="$ctrl.password" type="text" name="get-password"><br>
+          ng-model="$ctrl.password" type="text" name="get-password"
+          placeholder="password"><br>
       <button
         class="michael-jordan-submit-button"
         type="submit" name="button">Submit</button>
