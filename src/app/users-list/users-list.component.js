@@ -8,33 +8,28 @@ function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketLi
   const vm = this;
 
   vm.$onInit = function() {
-    console.log('ON INIT');
     vm.appState = appState;
     vm.users = roomUsers.users;
     vm.currentUser = currentUser;
     socket.emit('new-user', vm.currentUser);
+
     socketListeners.on('room-echo-whos-here', function(info) {
-      vm.users.push(info.user);
-      console.log('responding to whos here');
-      console.log(info);
-      console.log(vm.users);
+      if (info.user.username !== currentUser.username) {
+        vm.users.push(info.user);
+      }
       if (currentUser.username) {
-        socket.emit('im-here', currentUser);
+        let info = R.assoc('room', appState.room, currentUser);
+        socket.emit('im-here', info);
       }
       $scope.$apply();
     });
 
 
     socketListeners.on('room-add-user', function(user) {
-      console.log('add user:');
-      console.log(user);
-      let userNames = R.pluck('name', vm.users);
-      let contains = R.contains(user.name, userNames);
-      console.log(vm.users);
-      if (!contains && (user.name !== vm.currentUser.name)) {
-        console.log('pushing user');
+      let userNames = R.pluck('username', vm.users);
+      let contains = R.contains(user.username, userNames);
+      if (!contains && (user.username !== vm.currentUser.username)) {
         vm.users.push(user);
-        console.log(R.pluck('name', vm.users));
         $scope.$apply();
       }
     });

@@ -37,12 +37,8 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
     });
 
     socket.on('initialize-id', function(data) {
-      console.log("INIT ID:");
-      console.log(data);
       emit('initialize-id', data);
       socket.on(`${data.id}-incoming-call`, function(obj) {
-        console.log('incomingcall');
-        console.log(obj);
         emit('incoming-call', obj);
       });
       socket.on(`${data.id}-accepted-call`, function(obj) {
