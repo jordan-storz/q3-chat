@@ -21,7 +21,9 @@ const controller = [
           userHttp.create(currentUser)
             .then(response => {
               let user = response.data;
-              currentUser.username = user.username;
+              for(let key in user){
+                currentUser[key] = user[key];
+              }
               storage.setCurrentUser(currentUser);
             })
             .catch(console.log);

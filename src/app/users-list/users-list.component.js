@@ -3,15 +3,17 @@ import R from 'ramda';
 
 const controller = [
 'socket', '$scope', 'currentRoom', 'roomUsers', 'currentUser', 'appState',
-'socketListeners',
-function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketListeners) {
+'socketListeners', 'userHttp',
+function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketListeners, userHttp) {
   const vm = this;
 
   vm.$onInit = function() {
     vm.appState = appState;
     vm.users = roomUsers.users;
     vm.currentUser = currentUser;
+    vm.newUser = currentUser;
     socket.emit('new-user', vm.currentUser);
+    vm.showOldName = true;
 
     socketListeners.on('room-echo-whos-here', function(info) {
       if (info.user.username !== currentUser.username) {
@@ -48,6 +50,26 @@ function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketLi
 
   vm.changeName = function() {
     console.log('changing name');
+    vm.toggleShow();
+  }
+
+  vm.newNameSubmit = function() {
+    if(vm.newName.trim() !== '') {
+      let info = {
+        username: vm.newName
+      }
+      userHttp.update(info).then(function(response) {
+        console.log(response.data);
+        for(let key in response.data) {
+          currentUser[key] = response.data[key];
+        }
+      });
+    }
+    vm.toggleShow();
+  }
+
+  vm.toggleShow = function() {
+    vm.showOldName = !vm.showOldName;
   }
 
 }]
