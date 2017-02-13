@@ -1,6 +1,6 @@
 <h4 on-click="$ctrl.changeName()"
     ng-show="$ctrl.showOldName">{{$ctrl.currentUser.username}}</h4>
-<input ng-show="!$ctrl.showOldName" ng-model="$ctrl.newName" type="text" name="" value="">
+<input ng-show="!$ctrl.showOldName" ng-model="$ctrl.newName" type="text" name="" value="" id="show-old-name">
   <div class="btn btn-primary col-xs-3" ng-show="$ctrl.showOldName"
       ng-click="$ctrl.changeName()">Change
   </div>

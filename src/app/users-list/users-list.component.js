@@ -3,8 +3,8 @@ import R from 'ramda';
 
 const controller = [
 'socket', '$scope', 'currentRoom', 'roomUsers', 'currentUser', 'appState',
-'socketListeners', 'userHttp',
-function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketListeners, userHttp) {
+'socketListeners', 'userHttp','storage',
+function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketListeners, userHttp, storage) {
   const vm = this;
 
   vm.$onInit = function() {
@@ -51,6 +51,8 @@ function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketLi
   vm.changeName = function() {
     console.log('changing name');
     vm.toggleShow();
+    vm.newName = '';
+    $('#show-old-name').focus();
   }
 
   vm.newNameSubmit = function() {
@@ -63,6 +65,7 @@ function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketLi
         for(let key in response.data) {
           currentUser[key] = response.data[key];
         }
+        storage.setCurrentUser(currentUser);
       });
     }
     vm.toggleShow();
