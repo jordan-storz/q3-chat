@@ -1,8 +1,8 @@
 import template from './single-user.template.html';
 
 const controller = [
-  '$rootScope', '$scope', 'currentUser', 'socket', 'videoChat',
-  function($rootScope, $scope, currentUser, socket, videoChat) {
+  '$rootScope', '$scope', 'currentUser', 'socket', 'videoChat', 'userHttp',
+  function($rootScope, $scope, currentUser, socket, videoChat, userHttp) {
   const vm = this;
 
   vm.$onInit = function () {
@@ -15,12 +15,22 @@ const controller = [
     console.log(vm.hideOptionsWithThisUser);
   }
 
-  vm.blockUser = function(user) {
-    console.log(`blocking: ${user.name}`);
-    console.log(user);
+  vm.blockUser = function() {
+    console.log(`blocking: ${vm.user.username}`);
+    console.log(vm.user.id);
+    currentUser.blockedUsers.push(vm.user.id);
+    let body = {
+      blocker_id: currentUser.id,
+      blockee_id: vm.user.id
+    };
+
+    userHttp.createBlock(body)
+      .then(function(res) {
+
+      });
   }
 
-  vm.startVidChat = function(user) {
+  vm.startVidChat = function() {
     vm.currentUser.isOnCall = true;
     vm.acceptOrDecline = false;
     vm.currentUser.initiator = true;

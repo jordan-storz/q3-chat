@@ -11,4 +11,10 @@ module.exports = ['$http', 'currentUser', function($http, currentUser) {
     let patchEndpoint = endpoint + '/' + currentUser.id;
     return $http.patch(patchEndpoint, info);
   }
+
+  service.createBlock = function(body) {
+    const endpoint = 'https://mj-data.herokuapp.com/api/block_users';
+    // const endpoint = 'http://localhost:5200/api/block_users';
+    return $http.post(endpoint, body);
+  }
 }];

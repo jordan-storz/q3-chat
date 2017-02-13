@@ -4,7 +4,7 @@ module.exports = [
   'currentRoom', 'storage', 'appState',
   function(currentRoom, storage) {
   const service = this;
-  let user = {}
+  let user = {blockedUsers: []}
 
 
   function initialize() {

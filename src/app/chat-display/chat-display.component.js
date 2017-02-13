@@ -11,7 +11,6 @@ const controller = [
     vm.users = [];
 
     vm.$onInit = function() {
-
       vm.currentUser = currentUser;
       roomHttp.getRoom().then(response => {
         let room = response.data.room;

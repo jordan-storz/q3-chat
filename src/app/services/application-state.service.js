@@ -4,6 +4,7 @@ module.exports = [
     let defaultState = {
       room: '',
       isOnCall: false,
+      messages: []
     }
 
     return defaultState;
