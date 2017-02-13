@@ -1,11 +1,12 @@
 import template from './main.template.html';
 
 const controller = [
-  'currentRoom', 'currentUser', 'appState', 'socketListeners',
-  function(currentRoom, currentUser, appState, socketListeners) {
+  'currentRoom', 'currentUser', 'appState', 'socketListeners', '$location',
+  function(currentRoom, currentUser, appState, socketListeners, $location) {
     const vm = this;
 
     vm.$onInit = function() {
+      vm.thisUrl = $location.absUrl();
       vm.appState = appState;
       currentRoom.get().then(room => {
         appState.room = room;
