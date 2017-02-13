@@ -9,11 +9,10 @@ const controller = [
     vm.minimize = false;
     vm.messages = [];
     vm.users = [];
-    vm.showLogIn = true;
 
     vm.$onInit = function() {
+
       vm.currentUser = currentUser;
-      // socket.emit('first-contact', {url: vm.currentUser.room});
       roomHttp.getRoom().then(response => {
         let room = response.data.room;
         let messages = response.data.messages;

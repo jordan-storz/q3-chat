@@ -9,10 +9,6 @@
     "default_popup": "index.html"
   },
 
-  "background": {
-    "page": "index.html"
-  },
-
   "permissions": [
     "tabs",
     "activeTab",

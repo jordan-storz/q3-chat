@@ -6,6 +6,7 @@ module.exports = [
   const service = this;
   let user = {}
 
+
   function initialize() {
     let localUser = storage.getCurrentUser();
     if (!localUser) {
