@@ -17,4 +17,11 @@ module.exports = ['$http', 'currentUser', function($http, currentUser) {
     // const endpoint = 'http://localhost:5200/api/block_users';
     return $http.post(endpoint, body);
   }
+
+  service.fetch = function() {
+    let id = currentUser.id;
+    let url = endpoint + '/' + id;
+    console.log(url);
+    return $http.get(url);
+  }
 }];

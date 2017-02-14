@@ -1,4 +1,5 @@
 import template from './main.template.html';
+import R from 'ramda';
 
 const controller = [
   'currentRoom', 'currentUser', 'appState', 'socketListeners', '$location',
@@ -16,7 +17,18 @@ const controller = [
           for (let key in storageUser) {
             currentUser[key] = storageUser[key];
           }
-          console.log('USER EXISTS');
+          userHttp.fetch()
+            .then(response => {
+              console.log(response);
+              let user = response.data.user;
+              let currentBlocks = currentUser.blockUsers;
+              let newBlocks = response.data.blockUsers.filter(userId => {
+                return !R.contains(userId, currentBlocks);
+              });
+              currentUser.blockUsers = currentBlocks.concat(newBlocks);
+              storage.setCurrentUser(currentUser);
+              console.log(currentUser);
+            });
         } else {
           userHttp.create(currentUser)
             .then(response => {
