@@ -30,7 +30,8 @@ function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketLi
     socketListeners.on('room-add-user', function(user) {
       let userNames = R.pluck('username', vm.users);
       let contains = R.contains(user.username, userNames);
-      if (!contains && (user.username !== vm.currentUser.username)) {
+      let isBlocked = R.contains(user.id, currentUser.blockUsers);
+      if (!isBlocked && !contains && (user.username !== vm.currentUser.username)) {
         vm.users.push(user);
         $scope.$apply();
       }

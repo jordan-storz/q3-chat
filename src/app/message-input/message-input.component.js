@@ -12,6 +12,7 @@ const controller = [
       console.log(appState);
       if(vm.messageArea !== '') {
         let messageInfo = {
+          userId: currentUser.id,
           username: currentUser.username,
           room: appState.room,
           message: vm.messageArea
