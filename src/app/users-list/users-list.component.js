@@ -16,18 +16,21 @@ function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketLi
     vm.showOldName = true;
 
     socketListeners.on('room-echo-whos-here', function(info) {
-      if (info.user.username !== currentUser.username) {
-        vm.users.push(info.user);
+      if (!R.contains(info.user.id, currentUser.blockUsers)) {
+        if (info.user.username !== currentUser.username) {
+          vm.users.push(info.user);
+        }
+        if (currentUser.username) {
+          let info = R.assoc('room', appState.room, currentUser);
+          socket.emit('im-here', info);
+        }
+        $scope.$apply();
       }
-      if (currentUser.username) {
-        let info = R.assoc('room', appState.room, currentUser);
-        socket.emit('im-here', info);
-      }
-      $scope.$apply();
     });
 
 
     socketListeners.on('room-add-user', function(user) {
+
       let userNames = R.pluck('username', vm.users);
       let contains = R.contains(user.username, userNames);
       let isBlocked = R.contains(user.id, currentUser.blockUsers);

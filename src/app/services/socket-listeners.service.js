@@ -1,6 +1,6 @@
 import {Subject} from 'rxjs';
 
-module.exports = ['socket', 'currentUser', function(socket, currentUser) {
+module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUser, storage) {
   const service = this;
   const events_ = new Subject();
 
@@ -13,6 +13,14 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
 
   const emit = (name, data) => {
     return events_.next({name, data});
+  }
+
+  service.initializeId = (id) => {
+    socket.on(`${id}-block-me`, function(data) {
+      currentUser.blockedUsers.push(data.blocker_id);
+      storage.setCurrentUser(currentUser);
+      emit('new-user-block', data);
+    });
   }
 
   service.initialize = (room) => {
