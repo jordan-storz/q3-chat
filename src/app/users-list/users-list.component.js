@@ -2,14 +2,17 @@ import template from './users-list.template.html';
 import R from 'ramda';
 
 const controller = [
-'socket', '$scope', 'currentRoom', 'roomUsers', 'currentUser', 'appState',
+'socket', '$scope', 'currentRoom', 'currentUser', 'appState',
 'socketListeners', 'userHttp','storage',
-function(socket, $scope, currentRoom, roomUsers, currentUser, appState, socketListeners, userHttp, storage) {
+function(socket, $scope, currentRoom, currentUser, appState, socketListeners, userHttp, storage) {
   const vm = this;
 
   vm.$onInit = function() {
+    socketListeners.on('new-user-block', event => {
+      console.log(vm.users);
+    })
     vm.appState = appState;
-    vm.users = roomUsers.users;
+    vm.users = [];
     vm.currentUser = currentUser;
     vm.newUser = currentUser;
     socket.emit('new-user', vm.currentUser);

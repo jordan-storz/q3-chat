@@ -18,7 +18,7 @@ module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUs
   service.initializeId = (id) => {
     socket.on(`${id}-block-me`, function(data) {
       console.log('BLOCK-ME EVENT');
-      currentUser.blockedUsers.push(data.blocker_id);
+      currentUser.blockUsers.push(data.blocker_id);
       storage.setCurrentUser(currentUser);
       emit('new-user-block', data);
     });

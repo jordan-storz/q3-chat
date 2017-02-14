@@ -3,8 +3,8 @@ import template from './log-in.template.html';
 import R from 'ramda';
 
 const controller = [
-  'socket', 'roomUsers', 'currentUser', 'appState', 'storage',
-  function(socket, roomUsers, currentUser, appState, storage) {
+  'socket', 'currentUser', 'appState', 'storage',
+  function(socket, currentUser, appState, storage) {
   const vm = this;
 
   vm.$onInit = function () {
@@ -18,7 +18,7 @@ const controller = [
   }
 
   vm.doLogIn = function() {
-    
+
     vm.showLogIn = false; // if it doesnt pass the backend validation dont do this
   }
 }];

@@ -16,6 +16,7 @@ const controller = [
       console.log(data);
       if (data.blocker_id === vm.user.id) {
         vm.isBlocked = true;
+        $scope.$apply();
       }
     });
   }
