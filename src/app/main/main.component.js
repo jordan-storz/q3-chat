@@ -21,6 +21,7 @@ const controller = [
             .then(response => {
               console.log(response);
               let user = response.data.user;
+              socketListeners.initializeId(user.id);
               let currentBlocks = currentUser.blockUsers;
               let newBlocks = response.data.blockUsers.filter(userId => {
                 return !R.contains(userId, currentBlocks);
@@ -33,6 +34,7 @@ const controller = [
           userHttp.create(currentUser)
             .then(response => {
               let user = response.data;
+              socketListeners.initializeId(user.id);
               for(let key in user){
                 currentUser[key] = user[key];
               }
