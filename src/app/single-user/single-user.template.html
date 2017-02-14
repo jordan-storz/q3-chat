@@ -1,6 +1,7 @@
-<p ng-click="$ctrl.displayOptionsWithThisUser()">{{$ctrl.user.username}}</p>
+<p ng-click="$ctrl.displayOptionsWithThisUser()"
+  ng-hide="$ctrl.isBlocked">{{$ctrl.user.username}}</p>
 <div class="col-xs-4 flexer"
-  ng-show="!$ctrl.hideOptionsWithThisUser"
+  ng-show="!$ctrl.hideOptionsWithThisUser && !$ctrl.isBlocked"
   class="options-with-this-user-box flexer box-me container">
   <div ng-click="$ctrl.blockUser()"
       class="btn btn-danger col-xs-6">Block User</div>

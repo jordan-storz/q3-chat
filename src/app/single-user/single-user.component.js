@@ -5,6 +5,8 @@ const controller = [
   function($rootScope, $scope, currentUser, socket, videoChat, userHttp) {
   const vm = this;
 
+  vm.isBlocked = false;
+
   vm.$onInit = function () {
     vm.currentUser = currentUser;
     vm.hideOptionsWithThisUser = true;
@@ -16,6 +18,7 @@ const controller = [
   }
 
   vm.blockUser = function() {
+    vm.isBlocked = true;
     console.log(`blocking: ${vm.user.username}`);
     console.log(vm.user.id);
     currentUser.blockedUsers.push(vm.user.id);
