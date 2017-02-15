@@ -24,8 +24,8 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
           vm.users.push(info.user);
         }
         if (currentUser.username) {
-          let info = R.assoc('room', appState.room, currentUser);
-          socket.emit('im-here', info);
+          let currentUserInfo = R.assoc('room', appState.room, currentUser);
+          socket.emit('im-here', currentUserInfo);
         }
         $scope.$apply();
       }
@@ -33,14 +33,18 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
 
 
     socketListeners.on('room-add-user', function(user) {
-
-      let userNames = R.pluck('username', vm.users);
-      let contains = R.contains(user.username, userNames);
       let isBlocked = R.contains(user.id, currentUser.blockUsers);
-      if (!isBlocked && !contains && (user.username !== vm.currentUser.username)) {
+
+      let findUser = R.head(R.project(['id'], vm.users));
+      console.log(findUser);
+      if (findUser) {
+        findUser.username = user.username;
+        $scope.$apply();
+      } else {
         vm.users.push(user);
         $scope.$apply();
       }
+
     });
   }
 
@@ -73,6 +77,7 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
           currentUser[key] = response.data[key];
         }
         storage.setCurrentUser(currentUser);
+        socket.emit('im-here', currentUser);
       });
     }
     vm.toggleShow();
