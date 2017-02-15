@@ -8,11 +8,13 @@ const controller = [
 
   vm.$onInit = function() {
     vm.currentUser = currentUser;
-    events.on('block-messages', id => {
-      vm.messages = vm.messages.filter(message => {
-        return message.user.id !== id;
-      });
+    events.on('block-messages', eventInfo => {
+      vm.messages = vm.messages.filter(message => message.user.id !== eventInfo.id);
+      if (eventInfo.scopeApply) {
+        $scope.$apply();
+      }
     });
+
     socketListeners.on(`room-new-message`, function(data) {
       if (!R.contains(data.userId, currentUser.blockUsers)) {
         let message = {

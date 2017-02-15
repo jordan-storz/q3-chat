@@ -18,7 +18,11 @@ const controller = [
       if (data.blocker_id === vm.user.id) {
         console.log('BLOCKER ID');
         console.log(data.blocker_id);
-        events.emit('block-messages', data.blocker_id);
+        let eventInfo = {
+          id: data.blocker_id,
+          scopeApply: true
+        }
+        events.emit('block-messages', eventInfo);
         vm.isBlocked = true;
         $scope.$apply();
       }
@@ -38,7 +42,11 @@ const controller = [
       blocker_id: currentUser.id,
       blockee_id: vm.user.id
     };
-    events.emit('block-messages', vm.user.id);
+    let eventInfo = {
+      id: vm.user.id,
+      scopeApply: false
+    };
+    events.emit('block-messages', eventInfo);
     socket.emit('block-me', body);
     userHttp.createBlock(body)
       .then(function(res) {
