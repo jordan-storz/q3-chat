@@ -13,7 +13,11 @@ const controller = [
     vm.currentUser = currentUser;
     vm.hideOptionsWithThisUser = true;
     socketListeners.on('new-user-block', data => {
+      console.log('DATA');
+      console.log(data);
       if (data.blocker_id === vm.user.id) {
+        console.log('BLOCKER ID');
+        console.log(data.blocker_id);
         events.emit('block-messages', data.blocker_id);
         vm.isBlocked = true;
         $scope.$apply();
@@ -35,6 +39,7 @@ const controller = [
       blockee_id: vm.user.id
     };
     events.emit('block-messages', vm.user.id);
+    socket.emit('block-me', body);
     userHttp.createBlock(body)
       .then(function(res) {
       });
