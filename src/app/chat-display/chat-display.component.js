@@ -15,12 +15,11 @@ const controller = [
       roomHttp.getRoom().then(response => {
         let room = response.data.room;
         let messages = response.data.messages;
-        console.log('****currentUser.block*****');
-        console.log(currentUser.blockUsers);
         vm.messages = messages.filter(message => {
           return !R.contains(message.user.id, currentUser.blockUsers);
         });
         vm.room = room;
+        $scope.$apply();
       })
     }
 
@@ -28,17 +27,17 @@ const controller = [
       vm.minimize = !vm.minimize;
     }
 
-    vm.increaseOpacity = function() {
-        let opac = parseFloat($('.chat-room-wrapper ').css('opacity')) + .1;
-        if (opac >= 1) opac = 1;
-        $('.chat-room-wrapper ').css('opacity', opac);
-    }
-
-    vm.decreaseOpacity = function() {
-        let opac = parseFloat($('.chat-room-wrapper ').css('opacity')) - .1;
-        if (opac <= .1) opac = .1;
-        $('.chat-room-wrapper ').css('opacity', opac);
-    }
+    // vm.increaseOpacity = function() {
+    //     let opac = parseFloat($('.chat-room-wrapper ').css('opacity')) + .1;
+    //     if (opac >= 1) opac = 1;
+    //     $('.chat-room-wrapper ').css('opacity', opac);
+    // }
+    //
+    // vm.decreaseOpacity = function() {
+    //     let opac = parseFloat($('.chat-room-wrapper ').css('opacity')) - .1;
+    //     if (opac <= .1) opac = .1;
+    //     $('.chat-room-wrapper ').css('opacity', opac);
+    // }
 
 }]
 

@@ -11,6 +11,7 @@ import messagesListComponent  from './messages-list/messages-list.component.js';
 import singleMessageComponent from './single-message/single-message.component.js';
 import messageInputComponent  from './message-input/message-input.component.js';
 import logInComponent         from './log-in/log-in.component.js';
+import headerComponent        from './header/header.component.js'
 
 // Directives
 import dragDropDirective      from './directives/drag-drop.directive.js';
@@ -26,7 +27,7 @@ import videoChatService       from './services/video-chat.service.js';
 import storageService         from './services/storage.service.js';
 import applicationStateService  from './services/application-state.service.js';
 import socketListenersService   from './services/socket-listeners.service.js';
-import eventsService from './services/events.service.js';
+import eventsService          from './services/events.service.js';
 
 angular.module('chatApp', ['luegg.directives'])
   .component('mainComponent', mainComponent)
@@ -38,6 +39,7 @@ angular.module('chatApp', ['luegg.directives'])
   .component('singleMessage', singleMessageComponent)
   .component('messageInput', messageInputComponent)
   .component('logIn', logInComponent)
+  .component('myHeader', headerComponent)
   .directive('dragDrop', dragDropDirective)
   .service('socket', socketService)
   .service('currentRoom', currentRoomService)

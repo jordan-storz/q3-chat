@@ -1,0 +1,12 @@
+<header>MJCHAT
+  <h4 on-click="$ctrl.changeName()"
+      ng-show="$ctrl.showOldName">{{$ctrl.currentUser.username}}</h4>
+  <input ng-show="!$ctrl.showOldName"
+      ng-model="$ctrl.newName" type="text" name="" value="" id="show-old-name" ng-keypress="$ctrl.onInputKeypress($event)">
+  <div class="btn btn-primary col-xs-3" ng-show="$ctrl.showOldName"
+      ng-click="$ctrl.changeName()">Change
+  </div>
+  <div class="btn btn-primary col-xs-3" ng-show="!$ctrl.showOldName"
+      ng-click="$ctrl.newNameSubmit()">Submit
+  </div>
+</header>

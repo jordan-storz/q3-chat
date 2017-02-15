@@ -8,12 +8,10 @@
     <title>Chat App</title>
 </head>
 
-<body>
-    <header>MJCHAT</header>
+<body ng-app="chatApp">
+    <my-header></my-header>
     <main>
-      <chat-app ng-app="chatApp">
-        <main-component></main-component>
-      </chat-app>
+      <main-component></main-component>
     </main>
     <script src="vendor.bundle.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
