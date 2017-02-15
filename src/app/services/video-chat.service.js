@@ -58,6 +58,6 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
     }
 
     let contraints = { video: true, audio: true };
-    navigator.getUserMedia({ video: true, audio: true }, service.gotMedia, function () {})
+    navigator.getUserMedia({ video: true, audio: true }, service.gotMedia, console.error);
   }
 }];

@@ -6,7 +6,8 @@ module.exports = {
     vendor: [
       'jquery',
       'angular',
-      'socket.io-client'
+      'socket.io-client',
+      'angularjs-scroll-glue'
     ]
   },
   output: {

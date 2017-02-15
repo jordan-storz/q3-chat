@@ -27,7 +27,7 @@ import storageService         from './services/storage.service.js';
 import applicationStateService  from './services/application-state.service.js';
 import socketListenersService   from './services/socket-listeners.service.js';
 
-angular.module('chatApp', [])
+angular.module('chatApp', ['luegg.directives'])
   .component('mainComponent', mainComponent)
   .component('chatDisplay', chatDisplayComponent)
   .component('usersDisplay', usersListComponent)
