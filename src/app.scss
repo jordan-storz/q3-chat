@@ -5,8 +5,9 @@
 }
 
 html, body {
-  height: 600px;
+  height: 100%;
   overflow: hidden;
+  min-height: 300px;
 }
 
 body {
@@ -22,6 +23,11 @@ header {
   background-color: black;
   color: white;
   z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  input {
+    color: black;
+  }
 }
 
 chat-app {
@@ -118,11 +124,16 @@ div.interface {
   }
 
   .message-list-container {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: fixed;
     z-index: 1;
-    // border: 1px solid red;
     box-sizing: border-box;
   }
 
+}
+
+.flexer {
+  display: flex;
+  justify-content: space-around;
 }

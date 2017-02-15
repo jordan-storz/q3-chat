@@ -1,8 +1,8 @@
 import template from './header.template.html';
 import R from 'ramda';
 
-const controller = ['socket', 'currentUser', 'appState', 'storage',
-  function(socket, currentUser, appState, storage) {
+const controller = ['socket', 'currentUser', 'appState', 'storage', 'userHttp',
+  function(socket, currentUser, appState, storage, userHttp) {
   const vm = this;
   vm.showOldName = true;
 
