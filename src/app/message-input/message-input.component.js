@@ -16,10 +16,9 @@ const controller = [
           room: appState.room,
           message: vm.messageArea
         };
-        socket.emit('send-message', messageInfo);
-        messageHttp.postMessage(messageInfo)
-          .then(console.log);
         vm.messageArea = '';
+        socket.emit('send-message', messageInfo);
+        messageHttp.postMessage(messageInfo);
       }
     }
 

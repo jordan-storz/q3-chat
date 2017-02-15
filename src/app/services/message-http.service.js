@@ -1,6 +1,6 @@
 module.exports = ['$http', 'currentRoom', function($http, currentRoom) {
   const service = this;
-  const apiPont = 'https://mj-data.herokuapp.com/api/messages';
+  const apiPoint = 'https://mj-data.herokuapp.com/api/messages';
   // const apiPoint = 'http://localhost:5200/api/messages';
 
   const makeUrl = function() {

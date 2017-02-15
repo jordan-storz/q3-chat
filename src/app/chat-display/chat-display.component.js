@@ -15,7 +15,11 @@ const controller = [
       roomHttp.getRoom().then(response => {
         let room = response.data.room;
         let messages = response.data.messages;
-        vm.messages = messages;
+        console.log('****currentUser.block*****');
+        console.log(currentUser.blockUsers);
+        vm.messages = messages.filter(message => {
+          return !R.contains(message.user.id, currentUser.blockUsers);
+        });
         vm.room = room;
       })
     }
