@@ -33,9 +33,12 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
 
 
     socketListeners.on('room-add-user', function(user) {
+      console.log('ADD_USER_EVENT');
+      console.log(user);
       let isBlocked = R.contains(user.id, currentUser.blockUsers);
 
       let findUser = R.head(R.project(['id'], vm.users));
+      console.log('FIND USER:');
       console.log(findUser);
       if (findUser) {
         findUser.username = user.username;
@@ -77,7 +80,9 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
           currentUser[key] = response.data[key];
         }
         storage.setCurrentUser(currentUser);
-        socket.emit('im-here', currentUser);
+          let currentUserInfo = R.assoc('room', appState.room, currentUser);
+          console.log(currentUserInfo);
+          socket.emit('im-here', currentUserInfo);
       });
     }
     vm.toggleShow();
