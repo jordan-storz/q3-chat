@@ -9,7 +9,9 @@ const controller = [
   vm.$onInit = function() {
     vm.currentUser = currentUser;
     events.on('block-messages', eventInfo => {
-      vm.messages = vm.messages.filter(message => message.user.id !== eventInfo.id);
+      vm.messages = vm.messages.filter(message => {
+        return message.user.id !== eventInfo.id
+      });
       if (eventInfo.scopeApply) {
         $scope.$apply();
       }
@@ -19,7 +21,8 @@ const controller = [
       if (!R.contains(data.userId, currentUser.blockUsers)) {
         let message = {
           user: {
-            username: data.username
+            username: data.username,
+            id: data.userId
           },
           content: data.message
         }
