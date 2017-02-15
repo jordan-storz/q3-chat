@@ -19,7 +19,6 @@ const controller = [
         vm.messages.push(message);
         $scope.$apply();
       }
-
     });
   }
 }];

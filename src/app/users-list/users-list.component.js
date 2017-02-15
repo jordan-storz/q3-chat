@@ -3,8 +3,8 @@ import R from 'ramda';
 
 const controller = [
 'socket', '$scope', 'currentRoom', 'currentUser', 'appState',
-'socketListeners', 'userHttp','storage',
-function(socket, $scope, currentRoom, currentUser, appState, socketListeners, userHttp, storage) {
+'socketListeners', 'userHttp','storage', 'events',
+function(socket, $scope, currentRoom, currentUser, appState, socketListeners, userHttp, storage, events) {
   const vm = this;
 
   vm.$onInit = function() {
@@ -33,21 +33,20 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
 
 
     socketListeners.on('room-add-user', function(user) {
-      console.log('ADD_USER_EVENT');
-      console.log(user);
+      if (user.id === currentUser.id) {
+        return;
+      }
       let isBlocked = R.contains(user.id, currentUser.blockUsers);
-
-      let findUser = R.head(R.project(['id'], vm.users));
-      console.log('FIND USER:');
-      console.log(findUser);
-      if (findUser) {
-        findUser.username = user.username;
-        $scope.$apply();
+      let existingUser = vm.users.filter(roomUser => {
+        return roomUser.id === user.id;
+      })[0];
+      if (existingUser) {
+        events.emit(`${existingUser.username}-name-change`, user.username);
+        existingUser.username = user.username;
       } else {
         vm.users.push(user);
-        $scope.$apply();
       }
-
+      $scope.$apply();
     });
   }
 
@@ -90,6 +89,12 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
 
   vm.toggleShow = function() {
     vm.showOldName = !vm.showOldName;
+  }
+
+  vm.onInputKeypress = function (event) {
+    if (event.keyCode === 13) {
+      vm.newNameSubmit();
+    }
   }
 
 }]

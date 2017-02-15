@@ -26,6 +26,7 @@ import videoChatService       from './services/video-chat.service.js';
 import storageService         from './services/storage.service.js';
 import applicationStateService  from './services/application-state.service.js';
 import socketListenersService   from './services/socket-listeners.service.js';
+import eventsService from './services/events.service.js';
 
 angular.module('chatApp', ['luegg.directives'])
   .component('mainComponent', mainComponent)
@@ -48,3 +49,4 @@ angular.module('chatApp', ['luegg.directives'])
   .service('storage', storageService)
   .service('appState', applicationStateService)
   .service('socketListeners', socketListenersService)
+  .service('events', eventsService)
