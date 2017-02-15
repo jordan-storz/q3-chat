@@ -4,18 +4,26 @@ $('document').ready(function() {
   $(window).resize(makeLayout);
 
   function makeLayout() {
+    
     let interfaceWidth = $('div.interface').css('width');
     $('div.message-list-container').css('width', interfaceWidth);
 
-    let bodyHeight = parseInt($('body').css('height'));
-    let inputHeight = parseInt($('message-input').css('height'));
-    let headerHeight = parseInt($('header').css('height'));
+    if(window.location.href.substring(0, 10) !== 'chrome-ext') {
+      $('body').css('min-height', '300px');
 
-    [bodyHeight, inputHeight, headerHeight].forEach(x => console.log(x))
+      let windowHeight = $(window).height();
+      $('body').css('height', (.8 * windowHeight) + 'px');
 
-    let messageListHeight = (bodyHeight - inputHeight - headerHeight) + 'px';
+      let bodyHeight = parseInt($('body').css('height'));
+      let inputHeight = parseInt($('message-input').css('height'));
+      let headerHeight = parseInt($('header').css('height'));
 
-    console.log(messageListHeight);
-    $('.message-list-container').css('max-height', messageListHeight);
+      [bodyHeight, inputHeight, headerHeight].forEach(x => console.log(x))
+
+      let messageListHeight = (bodyHeight - inputHeight - headerHeight) + 'px';
+
+      console.log(messageListHeight);
+      $('.message-list-container').css('max-height', messageListHeight);
+    }
   }
 });
