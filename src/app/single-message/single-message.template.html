@@ -1,6 +1,5 @@
 <div class="wrapper"
-  ng-mouseover="$ctrl.toggleOptions()"
-  ng-mouseleave="$ctrl.showOptions = false">
+  ng-click="$ctrl.toggleOptions()">
   <div class="single-message-container">
     <p class="message-username">{{$ctrl.message.user.username}}: </p>
     <p class="message-message">{{$ctrl.message.content}}</p>
