@@ -16,10 +16,12 @@
         "./vendor/jquery.min.js",
         "./vendor/socket.io.js",
         "./vendor/simplepeer.min.js",
-        "./vendor/jquery-ui.min.js",
+        "./vendor/jquery.custom/jquery-ui.min.js",
         "video.js"
       ],
-      "css": ["video.style.css"]
+      "css": ["video.style.css",
+        "./vendor/jquery.custom/jquery-ui.min.css", "./vendor/jquery.custom/jquery-ui.structure.min.css",  "./vendor/jquery.custom/jquery-ui.theme.min.css" ]
+
     }
   ],
 

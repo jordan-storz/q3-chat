@@ -19,8 +19,6 @@ console.log(io);
       return val > acc ? val : acc;
     }, 0)
 
-
-
   const socketEndpoint = 'https://mj-sockets.herokuapp.com/';
   const socket = io.connect(socketEndpoint);
   const chatZIndex = maxZIndex + 1;
@@ -33,22 +31,23 @@ console.log(io);
 
   $container.append($video);
   $container.append($hangupBtn);
-  $container.draggable();
+  $container.draggable().resizable();
+  $container.resizable();
   $container.css({
     boxSizing: 'border-box',
-    backgroundColor: 'green',
+    backgroundColor: 'white',
     display: 'none',
     height: '150px',
     width: '200px',
     position: 'fixed',
     zIndex: chatZIndex,
     border: '1px solid black',
+    padding: '8px'
   });
   $video.css({
     boxSizing: 'border-box',
-    border: '1px solid white',
-    height: '148px',
-    width: '198px',
+    height: '132px',
+    width: '182px',
     zIndex: chatZIndex
   });
   $hangupBtn.css({
@@ -56,6 +55,23 @@ console.log(io);
     position: 'absolute',
     bottom: '10px',
     left: 'calc(50% - 15px)'
+  });
+
+  $container.resize(function() {
+    console.log('resizing container');
+    let width = parseInt($container.css('width')) - 16;
+    let height = parseInt($container.css('height')) - 16;
+    let bottom = $container.css('padding');
+    $video.css({
+      width: width + 'px',
+      height: height + 'px'
+    });
+    $hangupBtn.css({
+      width: '13%',
+      position: 'absolute',
+      bottom,
+      left: '43.5%'
+    });
   });
 
 
