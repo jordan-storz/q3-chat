@@ -12,6 +12,15 @@ console.log(io);
   chrome.extension.onConnect.addListener(port => {
     console.log('connected!!');
     port.onMessage.addListener(message => {
+      let $video = $('<video id="mj-chat-video"></video>');
+      $video.css({
+        display: 'none',
+        height: '200px',
+        width: '200px',
+        position: 'fixed',
+        border: '2px solid red'
+      });
+      $('body').append($video);
 
       if (message.messageName === 'startCall') {
         navigator.getUserMedia({video: true, audio: true}, gotMediaSend, () => {});
@@ -22,7 +31,6 @@ console.log(io);
             stream: stream
           });
           peer.on('signal', (data) => {
-            console.log(message);
             let callInfo = {
               fromId: message.fromId,
               toId: message.toId,
@@ -32,11 +40,16 @@ console.log(io);
           });
           socket.on(`${message.fromId}-accepted-call`, (data) => {
             console.log('ACCEPTED CALL');
+            console.log(data);
+            peer.signal(data.fromKey);
           });
           peer.on('stream', (stream) => {
-            document.querySelector('video')
-            video.src = window.URL.createObjectURL(stream);
-            video.play()
+            console.log('streaming!!');
+            $video.css({
+              display: 'block',
+            })
+            $video.attr('src', window.URL.createObjectURL(stream));
+            $video.get(0).play();
           })
         }
       } else if (message.messageName === 'acceptCall') {
@@ -60,10 +73,12 @@ console.log(io);
             socket.emit('accept-video-chat', callInfo);
           });
           peer.on('stream', (stream) => {
-            $('body').prepend($('<video class="mj-chat"></video>'));
-            let video = document.querySelector('video.mj-chat');
-            video.src = window.URL.createObjectURL(stream);
-            video.play()
+            console.log('streaming!!');
+            $video.css({
+              display: 'block',
+            })
+            $video.attr('src', window.URL.createObjectURL(stream));
+            $video.get(0).play();
           })
         }
       }

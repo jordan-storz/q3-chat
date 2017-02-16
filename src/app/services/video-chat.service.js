@@ -8,9 +8,9 @@ module.exports = ['socket', 'currentUser', 'contentMessage', function(socket, cu
 
   }
 
-  service.makeCallHappen = function (obj) {
-    service.peer.signal(obj.fromKey);
-  }
+  // service.makeCallHappen = function (obj) {
+  //   service.peer.signal(obj.fromKey);
+  // }
 
   service.powerOn = function (user) {
     contentMessage.sendMessage({
