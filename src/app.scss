@@ -107,17 +107,39 @@ div.interface {
   .video-display-wrapper {
     border: 2px solid black;
     position: fixed;
-    top: 0.7rem;
-    left: 0.7rem;
-    background: white;
+    top: 13rem;
+    left: 2.7rem;
+    background-color: black;
     height: 300px;
     width: 30rem;
-    video {
-      border: 0.3px solid gray;
-      height: 260px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 1px 1px 4px 2px grey;
+    h1 {
+      text-align: center;
+      color: white;
+      font-size: 3rem;
+      margin: 0;
     }
     .answer-options {
-      border: 2px solid green;
+      display: flex;
+      div.accept-call,
+      div.decline-call {
+        color: white;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        line-height: 95px;
+      }
+      div.accept-call {
+        background-color: green;
+      }
+      div.decline-call {
+        background-color: red;
+      }
     }
   }
 

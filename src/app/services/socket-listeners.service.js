@@ -49,9 +49,6 @@ module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUs
       socket.on(`${data.id}-incoming-call`, function(obj) {
         emit('incoming-call', obj);
       });
-      socket.on(`${data.id}-accepted-call`, function(obj) {
-        emit('accepted-call', obj);
-      });
     });
 
   }

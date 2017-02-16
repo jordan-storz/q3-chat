@@ -17,36 +17,34 @@ const controller = [
     vm.currentUser = currentUser;
     vm.isOnCall = false;
     vm.acceptOrDecline = false;
+    $('div.message-list-container').css({
+      color: 'transparent',
+      display: 'none'
+    });
+
   }
 
   socketListeners.on('incoming-call', function(obj) {
+    console.log('INCOMING  OBJECT:');
+    console.log(obj);
     vm.isOnCall = true;
     vm.acceptOrDecline = true;
+    vm.callerUsername = obj.callerUsername;
+    $('div.message-list-container').css({
+      color: 'transparent'
+    })
     vm.answerCall = function () {
       vm.acceptOrDecline = false;
       let message = R.merge(obj, {messageName: 'acceptCall'})
-      
       contentMessage.sendMessage(message);
-      // videoChat.powerOn(obj);
     }
     $scope.$apply();
   });
 
-  socketListeners.on('accepted-call', function(obj) {
-    vm.isOnCall = true;
-    videoChat.makeCallHappen(obj);
-    $scope.$apply();
-  });
-
-  vm.hangUp = function() {
-    appState.isOnCall = false;
-  }
 
 }]
 
 module.exports = {
   template,
-  controller,
-  bindings: {
-  }
+  controller
 }

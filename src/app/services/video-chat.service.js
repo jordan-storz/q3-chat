@@ -15,6 +15,7 @@ module.exports = ['socket', 'currentUser', 'contentMessage', function(socket, cu
   service.powerOn = function (user) {
     contentMessage.sendMessage({
       messageName: 'startCall',
+      callerUsername: currentUser.username,
       fromId: service.currentUser.socketId,
       toId: user.socketId
     });

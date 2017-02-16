@@ -1,16 +1,10 @@
-<div class="video-display-wrapper box-me container col-xs-3"
-    ng-show="$ctrl.isOnCall">
-
-  <div class="answer-options flexer" ng-show="$ctrl.acceptOrDecline">
+<div class="video-display-wrapper box-me container col-xs-3" ng-show="$ctrl.isOnCall">
+    <!-- ng-show="$ctrl.isOnCall" -->
+  <h1>{{$ctrl.callerUsername}}</h1>
+  <div class="answer-options flexer">
+    <!-- ng-show="!$ctrl.acceptOrDecline" -->
     <div class="accept-call" ng-click="$ctrl.answerCall()">Accept</div>
     <div class="decline-call">Decline</div>
-  </div>
-  <video class="michael-jordan-screen col-xs-12 box-me" ng-show="!$ctrl.currentUser.acceptOrDecline">
-    <source src="https://www.youtube.com/watch?v=woJrjb91pW4ub" type="">
-  </video>
-
-  <div class="michael-jordan-btn-container flexer box-me col-xs-12">
-    <i ng-click="$ctrl.hangUp()" class="glyphicon glyphicon-phone"></i>
   </div>
 
 </div>
