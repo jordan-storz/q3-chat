@@ -100,10 +100,12 @@ console.log(io);
             $video.attr('src', window.URL.createObjectURL(stream));
             $video.get(0).play();
           })
+          peer.on('close', () => {
+            hideVideoChat();
+          });
           $hangupBtn.click(event => {
             peer.destroy();
             $video.attr('src', '');
-
           });
         }
       } else if (message.messageName === 'acceptCall') {
@@ -135,6 +137,9 @@ console.log(io);
             $video.attr('src', window.URL.createObjectURL(stream));
             $video.get(0).play();
           })
+          peer.on('close', () => {
+            hideVideoChat();
+          });
           $hangupBtn.click(event => {
             peer.destroy();
             $video.attr('src', '');
@@ -142,6 +147,12 @@ console.log(io);
         }
       }
     });
+
+    function hideVideoChat() {
+      $container.css({
+        display: 'none'
+      })
+    }
   });
 
 
