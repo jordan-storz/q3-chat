@@ -9,6 +9,15 @@
     "default_popup": "index.html"
   },
 
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": [
+        "video.js"
+      ]
+    }
+  ],
+
   "permissions": [
     "tabs",
     "activeTab",
