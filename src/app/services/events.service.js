@@ -9,7 +9,6 @@ module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUs
   }
 
   service.on = (eventName, cb) => {
-    console.log('sending event');
     return events_
       .filter(event => event.name === eventName)
       .map(event => event.data)

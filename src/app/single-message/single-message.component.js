@@ -20,6 +20,8 @@ const controller = ['events','currentUser', 'storage', 'socket', 'userHttp', fun
   }
 
   vm.blockUser = function() {
+    console.log("BLOCK THIS GUY");
+    console.log(vm.message.user);
     vm.isBlocked = true;
     currentUser.blockUsers.push(vm.message.user.id);
     storage.setCurrentUser(currentUser);
@@ -39,13 +41,14 @@ const controller = ['events','currentUser', 'storage', 'socket', 'userHttp', fun
   }
 
   vm.startVidChat = function() {
-    vm.currentUser.isOnCall = true;
-    vm.acceptOrDecline = false;
-    vm.currentUser.initiator = true;
-    videoChat.powerOn(vm.message);
+    console.log('CHAT WITH THIS GUY');
+    console.log(vm.message.user.id);
+    // vm.currentUser.isOnCall = true;
+    // vm.acceptOrDecline = false;
+    // vm.currentUser.initiator = true;
+    // videoChat.powerOn(vm.message);
   }
 }]
-
 
 module.exports = {
   template,

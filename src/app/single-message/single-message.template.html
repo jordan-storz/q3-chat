@@ -1,18 +1,17 @@
-<div class="wrapper">
-  <div class="single-message-container" ng-click="$ctrl.toggleOptions()">
+<div class="wrapper"
+  ng-mouseover="$ctrl.toggleOptions()"
+  ng-mouseleave="$ctrl.showOptions = false">
+  <div class="single-message-container">
     <p class="message-username">{{$ctrl.message.user.username}}: </p>
     <p class="message-message">{{$ctrl.message.content}}</p>
   </div>
   <div>
     <div class="col-xs-4 flexer"
       ng-show="$ctrl.showOptions"
-      class="options-with-this-user-box flexer box-me container">
-      <div ng-click="$ctrl.blockUser()"
-          class="btn btn-danger col-xs-6">Block User</div>
-      <div ng-click="$ctrl.startVidChat()"
-          class="btn btn-info col-xs-6">Video Chat</div>
+      class="options-with-this-user-box flexer container">
+      <i ng-click="$ctrl.blockUser()" class="glyphicon glyphicon-trash"></i>
+      <i ng-click="$ctrl.startVidChat()" class="glyphicon glyphicon-phone-alt"></i>
       <br>
     </div>
   </div>
-
 </div>

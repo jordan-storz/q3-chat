@@ -7,7 +7,6 @@ module.exports = ['$http', 'currentUser', function($http, currentUser) {
   }
 
   service.update = function(info) {
-    console.log(endpoint + '/' + currentUser.id);
     let patchEndpoint = endpoint + '/' + currentUser.id;
     return $http.patch(patchEndpoint, info);
   }
@@ -21,7 +20,6 @@ module.exports = ['$http', 'currentUser', function($http, currentUser) {
   service.fetch = function() {
     let id = currentUser.id;
     let url = endpoint + '/' + id;
-    console.log(url);
     return $http.get(url);
   }
 }];

@@ -61,7 +61,6 @@ const controller = [
   }
 }];
 
-
 module.exports = {
   template,
   controller,

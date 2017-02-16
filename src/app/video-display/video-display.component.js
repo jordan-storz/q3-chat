@@ -6,8 +6,6 @@ const controller = [
     function(socket, $scope, currentUser, videoChat, appState, socketListeners) {
   const vm = this;
 
-
-      //I hate doing it this way
   let height = $('.michael-jordan-video-chat-wrapper').css('width');
   $('.michael-jordan-video-chat-wrapper').css('height', height);
   height = $('.michael-jordan-screen').css('width');
@@ -18,7 +16,6 @@ const controller = [
     vm.isOnCall = false;
     vm.acceptOrDecline = false;
   }
-
 
   socketListeners.on('incoming-call', function(obj) {
     vm.isOnCall = true;
@@ -37,8 +34,6 @@ const controller = [
   });
 
   vm.hangUp = function() {
-    console.log('hanging up');
-    //Do the simplepeer.js stuff needed to disconnect
     appState.isOnCall = false;
   }
 

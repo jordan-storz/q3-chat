@@ -1,3 +1,4 @@
+import $ from "jquery";
 import template from './header.template.html';
 import R from 'ramda';
 
@@ -11,10 +12,9 @@ const controller = ['socket', 'currentUser', 'appState', 'storage', 'userHttp',
   }
 
   vm.changeName = function() {
-    console.log('changing name');
     vm.toggleShow();
     vm.newName = '';
-    $('#show-old-name').focus();
+    $('input#show-old-name').focus();
   }
 
   vm.newNameSubmit = function() {
@@ -23,13 +23,11 @@ const controller = ['socket', 'currentUser', 'appState', 'storage', 'userHttp',
         username: vm.newName
       }
       userHttp.update(info).then(function(response) {
-        console.log(response.data);
         for(let key in response.data) {
           currentUser[key] = response.data[key];
         }
         storage.setCurrentUser(currentUser);
           let currentUserInfo = R.assoc('room', appState.room, currentUser);
-          console.log(currentUserInfo);
           socket.emit('im-here', currentUserInfo);
       });
     }
@@ -46,7 +44,6 @@ const controller = ['socket', 'currentUser', 'appState', 'storage', 'userHttp',
     }
   }
 }];
-
 
 module.exports = {
   template,

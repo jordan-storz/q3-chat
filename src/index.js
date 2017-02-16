@@ -5,6 +5,7 @@ import 'angularjs-scroll-glue';
 import './app.scss';
 import './app/app.module.js';
 
+
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
   let tab = tabs[0];
   var port = chrome.tabs.connect(tab.id, {name: 'chatApp'});

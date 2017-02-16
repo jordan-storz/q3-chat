@@ -45,11 +45,6 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
         }
       });
 
-      // document.querySelector('form').addEventListener('submit', function (ev) {
-      //   ev.preventDefault()
-      //   vm.peer.signal(JSON.parse(document.querySelector('#incoming').value))
-      // })
-
       service.peer.on('stream', function (stream) {
         var video = document.querySelector('video')
         video.src = window.URL.createObjectURL(stream)
