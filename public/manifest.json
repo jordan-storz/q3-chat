@@ -18,7 +18,8 @@
         "./vendor/simplepeer.min.js",
         "./vendor/jquery-ui.min.js",
         "video.js"
-      ]
+      ],
+      "css": ["video.style.css"]
     }
   ],
 

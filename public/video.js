@@ -4,6 +4,7 @@ console.log(io);
 
 
 
+
 (function() {
 
   let elements = $('*').toArray();
@@ -26,17 +27,42 @@ console.log(io);
   console.log('chatZ');
   console.log(chatZIndex);
 
+  let $container = $('<div id="mj-chat-1256129"></div>');
   let $video = $('<video id="mj-chat-video"></video>');
-  $video.draggable();
-  $video.css({
+  let $hangupBtn = $(`<img src="https://cdn.yelophone.com/www/v1/images/icons/hangup_action_red.png" alt="hang up" id="mj-chat-hangup-btn"/>`);
+
+  $container.append($video);
+  $container.append($hangupBtn);
+  $container.draggable();
+  $container.css({
+    boxSizing: 'border-box',
+    backgroundColor: 'green',
     display: 'none',
-    height: '200px',
+    height: '150px',
     width: '200px',
     position: 'fixed',
-    border: '2px solid red',
+    zIndex: chatZIndex,
+    border: '1px solid black',
+  });
+  $video.css({
+    boxSizing: 'border-box',
+    border: '1px solid white',
+    height: '148px',
+    width: '198px',
     zIndex: chatZIndex
   });
-  $('body').append($video);
+  $hangupBtn.css({
+    width: '30px',
+    position: 'absolute',
+    bottom: '10px',
+    left: 'calc(50% - 15px)'
+  });
+
+
+
+  $('body').prepend($container);
+
+
 
   chrome.extension.onConnect.addListener(port => {
     console.log('connected!!');
@@ -68,12 +94,17 @@ console.log(io);
           });
           peer.on('stream', (stream) => {
             console.log('streaming!!');
-            $video.css({
+            $container.css({
               display: 'block',
             })
             $video.attr('src', window.URL.createObjectURL(stream));
             $video.get(0).play();
           })
+          $hangupBtn.click(event => {
+            peer.destroy();
+            $video.attr('src', '');
+
+          });
         }
       } else if (message.messageName === 'acceptCall') {
         console.log(message);
@@ -98,21 +129,19 @@ console.log(io);
           });
           peer.on('stream', (stream) => {
             console.log('streaming!!');
-            $video.css({
+            $container.css({
               display: 'block',
             })
             $video.attr('src', window.URL.createObjectURL(stream));
             $video.get(0).play();
           })
+          $hangupBtn.click(event => {
+            peer.destroy();
+            $video.attr('src', '');
+          });
         }
       }
-
-
-
-
     });
-
-
   });
 
 
