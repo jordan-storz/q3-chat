@@ -23,7 +23,7 @@ const controller = [
     }
 
     vm.sendIsTyping = function() {
-      if(vm.messageArea.length > 0){
+      if(vm.messageArea !== ''){
         let data = {
           room: appState.room,
           user: currentUser
