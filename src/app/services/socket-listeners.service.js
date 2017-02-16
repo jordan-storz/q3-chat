@@ -17,7 +17,6 @@ module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUs
 
   service.initializeId = (id) => {
     socket.on(`${id}-block-me`, function(data) {
-      console.log('BLOCK-ME EVENT');
       currentUser.blockUsers.push(data.blocker_id);
       storage.setCurrentUser(currentUser);
       emit('new-user-block', data);
@@ -52,7 +51,6 @@ module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUs
       });
       socket.on(`${data.id}-accepted-call`, function(obj) {
         emit('accepted-call', obj);
-        console.log("THEY ACCEPTED YOUR CALL!!!!");
       });
     });
 

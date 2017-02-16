@@ -19,10 +19,9 @@ const controller = [
 
   vm.doLogIn = function() {
 
-    vm.showLogIn = false; // if it doesnt pass the backend validation dont do this
+    vm.showLogIn = false;
   }
 }];
-
 
 module.exports = {
   template,

@@ -19,7 +19,6 @@ const controller = [
           }
           userHttp.fetch()
             .then(response => {
-              console.log(response);
               let user = response.data.user;
               socketListeners.initializeId(user.id);
               let currentBlocks = currentUser.blockUsers;
@@ -28,7 +27,6 @@ const controller = [
               });
               currentUser.blockUsers = currentBlocks.concat(newBlocks);
               storage.setCurrentUser(currentUser);
-              console.log(currentUser);
             });
         } else {
           userHttp.create(currentUser)
