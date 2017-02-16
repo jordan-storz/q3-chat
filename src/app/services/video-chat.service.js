@@ -18,6 +18,7 @@ module.exports = ['socket', 'currentUser', 'contentMessage', function(socket, cu
       fromId: service.currentUser.socketId,
       toId: user.socketId
     });
+
     // service.gotMedia = function(stream) {
     //   service.peer = new Peer({
     //     initiator: service.currentUser.initiator,

@@ -1,9 +1,11 @@
+import R from 'ramda';
+
 import template from './video-display.template.html';
 let Peer = require('simple-peer');
 
 const controller = [
-  'socket', '$scope', 'currentUser', 'videoChat', 'appState', 'socketListeners',
-    function(socket, $scope, currentUser, videoChat, appState, socketListeners) {
+  'socket', '$scope', 'currentUser', 'videoChat', 'appState', 'socketListeners', 'contentMessage',
+    function(socket, $scope, currentUser, videoChat, appState, socketListeners, contentMessage) {
   const vm = this;
 
   let height = $('.michael-jordan-video-chat-wrapper').css('width');
@@ -22,7 +24,9 @@ const controller = [
     vm.acceptOrDecline = true;
     vm.answerCall = function () {
       vm.acceptOrDecline = false;
-      videoChat.powerOn(obj);
+      let message = R.merge(obj, {messageName: 'receiveCall'})
+      contentMessage.sendMessage(message);
+      // videoChat.powerOn(obj);
     }
     $scope.$apply();
   });
