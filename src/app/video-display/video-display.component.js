@@ -24,7 +24,8 @@ const controller = [
     vm.acceptOrDecline = true;
     vm.answerCall = function () {
       vm.acceptOrDecline = false;
-      let message = R.merge(obj, {messageName: 'receiveCall'})
+      let message = R.merge(obj, {messageName: 'acceptCall'})
+      
       contentMessage.sendMessage(message);
       // videoChat.powerOn(obj);
     }
