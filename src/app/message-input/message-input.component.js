@@ -22,6 +22,16 @@ const controller = [
       }
     }
 
+    vm.sendIsTyping = function() {
+      if(vm.messageArea.length > 0){
+        let data = {
+          room: appState.room,
+          user: currentUser
+        }
+        socket.emit('user-typing', data);
+      }
+    }
+
 }]
 
 module.exports = {

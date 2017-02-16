@@ -1,4 +1,5 @@
 <textarea class="message-area"
     ng-model="$ctrl.messageArea"
+    ng-keyup="$ctrl.sendIsTyping()"
     placeholder="Your message here"></textarea>
 <input type="submit" ng-click="$ctrl.sendMessage()" class="new-message-sender btn-success btn">

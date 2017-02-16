@@ -10,6 +10,7 @@ const controller = [
   vm.isBlocked = false;
 
   vm.$onInit = function () {
+    vm.isTyping = false;
     vm.currentUser = currentUser;
     vm.hideOptionsWithThisUser = true;
     socketListeners.on('new-user-block', data => {
@@ -27,6 +28,18 @@ const controller = [
         $scope.$apply();
       }
     });
+
+    socketListeners.on(`${vm.user.id}-user-typing`, function() {
+      vm.isTyping = true;
+      console.log(`${data} someone is now typing`);
+    });
+
+    socketListeners.on(`${vm.user.id}-user-done-typing`, function(data) {
+      vm.isTyping = false;
+      console.log(`${data} someone is done typing`);
+    });
+
+
   }
 
   vm.displayOptionsWithThisUser = function() {
@@ -59,6 +72,7 @@ const controller = [
     vm.currentUser.initiator = true;
     videoChat.powerOn(vm.user);
   }
+
 }];
 
 module.exports = {

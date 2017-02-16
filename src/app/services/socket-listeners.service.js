@@ -51,5 +51,13 @@ module.exports = ['socket', 'currentUser', 'storage', function(socket, currentUs
       });
     });
 
+    socket.on(`${room}-user-typing`, function(user) {
+      emit(`${user.id}-user-typing`, user.id);
+    })
+
+    socket.on(`${room}-user-done-typing`, function(data) {
+      emit(`${data.userId}-user-done-typing`, data.userId);
+    })
+
   }
 }];

@@ -1,7 +1,6 @@
 <div
   ng-mouseover="$ctrl.displayOptionsWithThisUser()">
-  <p
-    ng-mouseleave="$ctrl.displayOptionsWithThisUser()"
+  <p ng-mouseleave="$ctrl.displayOptionsWithThisUser()"
     ng-hide="$ctrl.isBlocked">{{$ctrl.user.username}}</p>
   <div class="flexer"
     ng-show="!$ctrl.hideOptionsWithThisUser && !$ctrl.isBlocked"
