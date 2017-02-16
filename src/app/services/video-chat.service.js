@@ -14,8 +14,6 @@ module.exports = ['socket', 'currentUser', function(socket, currentUser) {
 
   service.powerOn = function (user) {
     service.gotMedia = function(stream) {
-      console.log('GOT MEDIA');
-      console.log(currentUser);
       service.peer = new Peer({
         initiator: service.currentUser.initiator,
         trickle: false,
