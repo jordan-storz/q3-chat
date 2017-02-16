@@ -3,11 +3,12 @@ import R from 'ramda';
 
 const controller = [
   'currentRoom', 'currentUser', 'appState', 'socketListeners', '$location',
-  'userHttp', 'socket', '$scope', 'storage',
-  function(currentRoom, currentUser, appState, socketListeners, $location, userHttp, socket, $scope, storage) {
+  'userHttp', 'socket', '$scope', 'storage', 'contentMessage',
+  function(currentRoom, currentUser, appState, socketListeners, $location, userHttp, socket, $scope, storage, contentMessage) {
     const vm = this;
 
     vm.$onInit = function() {
+      contentMessage.initialize();
       vm.thisUrl = $location.absUrl();
       vm.appState = appState;
       vm.currentUser = currentUser;
@@ -52,6 +53,8 @@ const controller = [
         });
       });
     }
+
+    vm.testMessage = () => contentMessage.sendMessage({msg: 'hello'});
 }];
 
 module.exports = {

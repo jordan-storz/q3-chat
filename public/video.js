@@ -1,11 +1,17 @@
 console.log('loading background');
+console.log($);
+console.log(io);
+console.log(SimplePeer);
 chrome.extension.onConnect.addListener(port => {
-
   console.log('connected!!');
   port.onMessage.addListener(msg => {
     console.log('received message from popup script');
-    document.querySelector('body').innerText = "hey!!!"
+    console.log(msg);
   });
 });
 
-console.log(chrome.extension.onConnect);
+
+(function() {
+  const socketEndpoint = "";
+    
+}());

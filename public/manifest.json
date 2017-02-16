@@ -13,6 +13,9 @@
     {
       "matches": ["*://*/*"],
       "js": [
+        "./vendor/jquery.min.js",
+        "./vendor/socket.io.js",
+        "./vendor/simplepeer.min.js",
         "video.js"
       ]
     }
