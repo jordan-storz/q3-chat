@@ -6,6 +6,7 @@ const controller = [
   'events',
   function($rootScope, $scope, currentUser, socket, videoChat, userHttp, socketListeners, storage, events) {
   const vm = this;
+  vm.iteration = 0;
 
   vm.isBlocked = false;
 
@@ -29,16 +30,14 @@ const controller = [
       }
     });
 
-    socketListeners.on(`${vm.user.id}-user-typing`, function() {
-      vm.isTyping = true;
-      console.log(`${data} someone is now typing`);
+    socketListeners.on(`${vm.user.id}-user-typing`, function(data) {
+      console.log('SOMEONE IS TYPING', vm.iteration);
+      if((vm.iteration % 3) === 0) {
+        $(`#${vm.user.id}-single-user`).fadeOut(500);
+        $(`#${vm.user.id}-single-user`).fadeIn(500);
+      }
+      vm.iteration++;
     });
-
-    socketListeners.on(`${vm.user.id}-user-done-typing`, function(data) {
-      vm.isTyping = false;
-      console.log(`${data} someone is done typing`);
-    });
-
 
   }
 
