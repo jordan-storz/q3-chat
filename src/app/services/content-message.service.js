@@ -11,9 +11,7 @@ module.exports = [function () {
   }
 
   service.sendMessage = (message) => {
-    console.log('sending message');
     if (service.port) {
-      console.log('sending message to content script');
       service.port.postMessage(message);
     }
   }

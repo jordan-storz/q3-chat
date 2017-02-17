@@ -1,10 +1,3 @@
-console.log('loading background');
-console.log($);
-console.log(io);
-
-
-
-
 (function() {
 
   let elements = $('*').toArray();
@@ -22,8 +15,6 @@ console.log(io);
   const socketEndpoint = 'https://mj-sockets.herokuapp.com/';
   const socket = io.connect(socketEndpoint);
   const chatZIndex = maxZIndex + 1;
-  console.log('chatZ');
-  console.log(chatZIndex);
 
   let $container = $('<div id="mj-chat-1256129"></div>');
   let $video = $('<video id="mj-chat-video"></video>');
@@ -58,7 +49,6 @@ console.log(io);
   });
 
   $container.resize(function() {
-    console.log('resizing container');
     let width = parseInt($container.css('width')) - 16;
     let height = parseInt($container.css('height')) - 16;
     let bottom = $container.css('padding');
@@ -74,14 +64,9 @@ console.log(io);
     });
   });
 
-
-
   $('body').prepend($container);
 
-
-
   chrome.extension.onConnect.addListener(port => {
-    console.log('connected!!');
     port.onMessage.addListener(message => {
 
       if (message.messageName === 'startCall') {
@@ -93,8 +78,6 @@ console.log(io);
             stream: stream
           });
           peer.on('signal', (data) => {
-            console.log('MESSAGE INFO:');
-            console.log(message);
             let callInfo = {
               callerUsername: message.callerUsername,
               fromId: message.fromId,
@@ -104,12 +87,9 @@ console.log(io);
             socket.emit('request-video-chat', callInfo);
           });
           socket.on(`${message.fromId}-accepted-call`, (data) => {
-            console.log('ACCEPTED CALL');
-            console.log(data);
             peer.signal(data.fromKey);
           });
           peer.on('stream', (stream) => {
-            console.log('streaming!!');
             $container.css({
               display: 'block',
             })
@@ -125,10 +105,8 @@ console.log(io);
           });
         }
       } else if (message.messageName === 'acceptCall') {
-        console.log(message);
         navigator.getUserMedia({video: true, audio: true}, gotMediaReceive, () => {});
         function gotMediaReceive(stream) {
-          console.log('GOT THE MEDIA');
           let peer = new SimplePeer({
             initiator: false,
             trickle: false,
@@ -136,7 +114,6 @@ console.log(io);
           });
           peer.signal(message.fromKey);
           peer.on('signal', (data) => {
-            console.log('RECEIVED SIGNAL');
             let callInfo = {
               callerUsername: message.callerUsername,
               fromId: message.toId,
@@ -146,7 +123,6 @@ console.log(io);
             socket.emit('accept-video-chat', callInfo);
           });
           peer.on('stream', (stream) => {
-            console.log('streaming!!');
             $container.css({
               display: 'block',
             })
@@ -169,10 +145,6 @@ console.log(io);
         display: 'none'
       })
     }
+
   });
-
-
-
-
-
 }());

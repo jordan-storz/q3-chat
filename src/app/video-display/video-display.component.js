@@ -4,10 +4,8 @@ import template from './video-display.template.html';
 let Peer = require('simple-peer');
 
 const controller = [
-  'socket', '$scope', 'currentUser', 'videoChat', 'appState', 'socketListeners', 'contentMessage',
-    function(socket, $scope, currentUser, videoChat, appState, socketListeners, contentMessage) {
+  'socket', '$scope', 'currentUser', 'videoChat', 'appState', 'socketListeners', 'contentMessage', function(socket, $scope, currentUser, videoChat, appState, socketListeners, contentMessage) {
   const vm = this;
-
 
   vm.$onInit = function() {
     vm.currentUser = currentUser;
@@ -15,8 +13,6 @@ const controller = [
   }
 
   socketListeners.on('incoming-call', function(obj) {
-    console.log('INCOMING  OBJECT:');
-    console.log(obj);
     vm.isOnCall = true;
     vm.acceptOrDecline = true;
     vm.callerUsername = obj.callerUsername;
@@ -42,8 +38,6 @@ const controller = [
     }
     $scope.$apply();
   });
-
-
 
 }]
 

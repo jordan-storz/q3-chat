@@ -7,7 +7,6 @@ const controller = [
   function($rootScope, $scope, currentUser, socket, videoChat, userHttp, socketListeners, storage, events) {
   const vm = this;
   vm.iteration = 0;
-
   vm.isBlocked = false;
 
   vm.$onInit = function () {
@@ -15,11 +14,7 @@ const controller = [
     vm.currentUser = currentUser;
     vm.hideOptionsWithThisUser = true;
     socketListeners.on('new-user-block', data => {
-      console.log('DATA');
-      console.log(data);
       if (data.blocker_id === vm.user.id) {
-        console.log('BLOCKER ID');
-        console.log(data.blocker_id);
         let eventInfo = {
           id: data.blocker_id,
           scopeApply: true
@@ -31,19 +26,21 @@ const controller = [
     });
 
     socketListeners.on(`${vm.user.id}-user-typing`, function(data) {
-      console.log('SOMEONE IS TYPING', vm.iteration);
       if((vm.iteration % 3) === 0) {
-        $(`#${vm.user.id}-single-user`).fadeOut(500);
-        $(`#${vm.user.id}-single-user`).fadeIn(500);
+        $(`#${vm.user.id}-single-user`).fadeOut(400);
+        $(`#${vm.user.id}-single-user`).fadeIn(400);
       }
       vm.iteration++;
+    });
+
+    socketListeners.on(`${vm.user.id}-user-done-typing`, function(data) {
+      $(`#${vm.user.id}-single-user`).fadeIn(200);
     });
 
   }
 
   vm.displayOptionsWithThisUser = function() {
     vm.hideOptionsWithThisUser = !vm.hideOptionsWithThisUser;
-    console.log(vm.hideOptionsWithThisUser);
   }
 
   vm.blockUser = function() {
@@ -61,8 +58,7 @@ const controller = [
     events.emit('block-messages', eventInfo);
     socket.emit('block-me', body);
     userHttp.createBlock(body)
-      .then(function(res) {
-      });
+      .then(function(res) {});
   }
 
   vm.startVidChat = function() {

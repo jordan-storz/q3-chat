@@ -8,9 +8,7 @@ function(socket, $scope, currentRoom, currentUser, appState, socketListeners, us
   const vm = this;
 
   vm.$onInit = function() {
-    socketListeners.on('new-user-block', event => {
-      console.log(vm.users);
-    })
+    socketListeners.on('new-user-block', event => {})
     vm.appState = appState;
     vm.users = [];
     vm.currentUser = currentUser;
